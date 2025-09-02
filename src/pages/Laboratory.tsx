@@ -146,7 +146,7 @@ export default function Laboratory() {
       <Tabs defaultValue="models" className="space-y-6">
         <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="models">Настройка моделей</TabsTrigger>
-          <TabsTrigger value="workflows">N8N Платформа</TabsTrigger>
+          <TabsTrigger value="workflows">Конструктор</TabsTrigger>
           <TabsTrigger value="openml">Open ML</TabsTrigger>
           <TabsTrigger value="solutions">Готовые решения</TabsTrigger>
         </TabsList>
@@ -435,11 +435,11 @@ export default function Laboratory() {
           </div>
         </TabsContent>
 
-        {/* N8N Workflow Platform Tab */}
+        {/* Workflow Platform Tab */}
         <TabsContent value="workflows" className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold text-foreground">N8N Платформа автоматизации</h1>
+              <h1 className="text-3xl font-bold text-foreground">Конструктор автоматизации</h1>
               <p className="text-muted-foreground">Создание и управление рабочими процессами с AI интеграцией</p>
             </div>
             <Button className="bg-gradient-primary">

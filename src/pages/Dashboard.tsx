@@ -3,7 +3,6 @@ import { QazCloudLogo } from "@/components/ui/qazcloud-logo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { ChatInterface } from "@/components/chat/ChatInterface";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { 
@@ -65,19 +64,16 @@ export default function Dashboard() {
     {
       name: "Клиенттердің деректерін талдау",
       status: "Орындалуда",
-      progress: 67,
       type: "Классификация"
     },
     {
       name: "Ұсыныстар жүйесі",
       status: "Аяқталды", 
-      progress: 100,
       type: "ML Pipeline"
     },
     {
       name: "Құжаттарды өңдеу",
       status: "Жоспарлау",
-      progress: 15,
       type: "NLP"
     }
   ];
@@ -229,7 +225,6 @@ export default function Dashboard() {
                       {project.status}
                     </span>
                   </div>
-                  <Progress value={project.progress} className="h-2 w-32" />
                 </div>
                 <Button variant="ghost" size="sm">
                   <ArrowRight className="h-4 w-4" />
@@ -240,47 +235,6 @@ export default function Dashboard() {
           </Card>
         </div>
       </div>
-
-      {/* Quick Actions */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Zap className="h-5 w-5" />
-            Быстрые действия
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button variant="outline" className="justify-start h-auto p-4">
-              <div className="flex items-center gap-3">
-                <Database className="h-5 w-5 text-primary" />
-                <div className="text-left">
-                  <div className="font-medium">Новая модель</div>
-                  <div className="text-xs text-muted-foreground">Добавить модель в каталог</div>
-                </div>
-              </div>
-            </Button>
-            <Button variant="outline" className="justify-start h-auto p-4">
-              <div className="flex items-center gap-3">
-                <Network className="h-5 w-5 text-primary" />
-                <div className="text-left">
-                  <div className="font-medium">Создать пайплайн</div>
-                  <div className="text-xs text-muted-foreground">Настроить обработку данных</div>
-                </div>
-              </div>
-            </Button>
-            <Button variant="outline" className="justify-start h-auto p-4">
-              <div className="flex items-center gap-3">
-                <Clock className="h-5 w-5 text-primary" />
-                <div className="text-left">
-                  <div className="font-medium">Расписание</div>
-                  <div className="text-xs text-muted-foreground">Автоматические задачи</div>
-                </div>
-              </div>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   );
 }

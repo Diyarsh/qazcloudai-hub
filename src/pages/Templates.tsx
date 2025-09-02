@@ -27,8 +27,6 @@ interface Template {
   category: string;
   difficulty: 'Начинающий' | 'Средний' | 'Продвинутый';
   rating: number;
-  downloads: number;
-  author: string;
   tags: string[];
   estimatedTime: string;
   preview: string;
@@ -42,8 +40,6 @@ const mockTemplates: Template[] = [
     category: 'NLP',
     difficulty: 'Средний',
     rating: 4.8,
-    downloads: 1250,
-    author: 'QazCloud AI Team',
     tags: ['sentiment-analysis', 'nlp', 'customer-feedback'],
     estimatedTime: '2-3 часа',
     preview: 'Включает предобработку текста, векторизацию, обучение модели и визуализацию результатов'
@@ -55,8 +51,6 @@ const mockTemplates: Template[] = [
     category: 'Anomaly Detection',
     difficulty: 'Продвинутый',
     rating: 4.9,
-    downloads: 890,
-    author: 'DataScience Pro',
     tags: ['anomaly-detection', 'monitoring', 'production'],
     estimatedTime: '4-5 часов',
     preview: 'Автоэнкодеры, изоляционный лес, статистические методы обнаружения выбросов'
@@ -68,8 +62,6 @@ const mockTemplates: Template[] = [
     category: 'Recommendation',
     difficulty: 'Средний',
     rating: 4.7,
-    downloads: 2100,
-    author: 'ML Engineer',
     tags: ['recommendation', 'collaborative-filtering', 'ecommerce'],
     estimatedTime: '3-4 часа',
     preview: 'Коллаборативная и контентная фильтрация, гибридные подходы'
@@ -81,8 +73,6 @@ const mockTemplates: Template[] = [
     category: 'Computer Vision',
     difficulty: 'Начинающий',
     rating: 4.6,
-    downloads: 3200,
-    author: 'CV Specialist',
     tags: ['computer-vision', 'cnn', 'transfer-learning'],
     estimatedTime: '1-2 часа',
     preview: 'Предобученные модели, fine-tuning, аугментация данных'
@@ -94,8 +84,6 @@ const mockTemplates: Template[] = [
     category: 'Time Series',
     difficulty: 'Средний',
     rating: 4.5,
-    downloads: 1800,
-    author: 'Time Series Expert',
     tags: ['time-series', 'forecasting', 'lstm'],
     estimatedTime: '3-4 часа',
     preview: 'ARIMA, LSTM, Prophet для анализа трендов и сезонности'
@@ -107,8 +95,6 @@ const mockTemplates: Template[] = [
     category: 'NLP',
     difficulty: 'Продвинутый',
     rating: 4.9,
-    downloads: 980,
-    author: 'QazCloud AI Team',
     tags: ['chatbot', 'rag', 'vector-search'],
     estimatedTime: '5-6 часов',
     preview: 'Векторная база знаний, семантический поиск, генерация ответов'
@@ -207,12 +193,10 @@ export default function Templates() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
           { title: "Всего шаблонов", value: "24", icon: FileText },
-          { title: "Популярных", value: "8", icon: Star },
-          { title: "Скачиваний", value: "12.5K", icon: Download },
-          { title: "Авторов", value: "15", icon: Users }
+          { title: "Популярных", value: "8", icon: Star }
         ].map((stat, index) => (
           <Card key={index}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -312,22 +296,14 @@ export default function Templates() {
                 )}
               </div>
               
-              <div className="grid grid-cols-2 gap-4 text-sm text-muted-foreground">
+              <div className="grid grid-cols-1 gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <Star className="h-4 w-4 text-yellow-500 fill-current" />
                   <span>{template.rating}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Download className="h-4 w-4" />
-                  <span>{template.downloads}</span>
-                </div>
-                <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
                   <span>{template.estimatedTime}</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Users className="h-4 w-4" />
-                  <span className="text-xs truncate">{template.author}</span>
                 </div>
               </div>
               

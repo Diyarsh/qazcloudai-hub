@@ -11,7 +11,7 @@ import Dashboard from "./pages/Dashboard";
 import Models from "./pages/Models";
 import Projects from "./pages/Projects";
 import NewProject from "./pages/NewProject";
-import Pipelines from "./pages/Pipelines";
+
 import Templates from "./pages/Templates";
 import Laboratory from "./pages/Laboratory";
 import MLOps from "./pages/MLOps";
@@ -51,11 +51,6 @@ const App = () => (
                 </AppLayout>
               } />
               <Route path="/projects/new" element={<NewProject />} />
-              <Route path="/pipelines" element={
-                <AppLayout>
-                  <Pipelines />
-                </AppLayout>
-              } />
               <Route path="/templates" element={
                 <AppLayout>
                   <Templates />

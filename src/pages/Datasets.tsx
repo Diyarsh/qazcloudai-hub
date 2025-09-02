@@ -42,7 +42,6 @@ interface Dataset {
   owner: string;
   created: Date;
   lastModified: Date;
-  downloads: number;
   tags: string[];
   format: string;
 }
@@ -60,7 +59,6 @@ const mockDatasets: Dataset[] = [
     owner: 'QazCloud Research',
     created: new Date('2024-01-01'),
     lastModified: new Date('2024-01-14'),
-    downloads: 1247,
     tags: ['nlp', 'news', 'kazakh', 'russian'],
     format: 'CSV'
   },
@@ -75,7 +73,6 @@ const mockDatasets: Dataset[] = [
     owner: 'Medical AI Lab',
     created: new Date('2023-11-15'),
     lastModified: new Date('2024-01-10'),
-    downloads: 89,
     tags: ['medical', 'ct-scan', 'segmentation', 'healthcare'],
     format: 'DICOM'
   },
@@ -91,7 +88,6 @@ const mockDatasets: Dataset[] = [
     owner: 'FinTech Solutions',
     created: new Date('2023-12-20'),
     lastModified: new Date('2024-01-12'),
-    downloads: 342,
     tags: ['finance', 'fraud-detection', 'synthetic', 'banking'],
     format: 'Parquet'
   },
@@ -106,7 +102,6 @@ const mockDatasets: Dataset[] = [
     owner: 'Smart Home KZ',
     created: new Date('2023-10-05'),
     lastModified: new Date('2024-01-08'),
-    downloads: 623,
     tags: ['voice', 'iot', 'smart-home', 'kazakh-speech'],
     format: 'WAV'
   },
@@ -121,7 +116,6 @@ const mockDatasets: Dataset[] = [
     owner: 'Traffic Analytics',
     created: new Date('2023-09-12'),
     lastModified: new Date('2024-01-05'),
-    downloads: 156,
     tags: ['traffic', 'computer-vision', 'surveillance', 'almaty'],
     format: 'MP4'
   },
@@ -137,7 +131,6 @@ const mockDatasets: Dataset[] = [
     owner: 'E-commerce Analytics',
     created: new Date('2023-08-20'),
     lastModified: new Date('2024-01-07'),
-    downloads: 892,
     tags: ['sentiment', 'reviews', 'ecommerce', 'nlp'],
     format: 'JSON'
   }
@@ -403,10 +396,6 @@ export default function Datasets() {
                 <div className="flex items-center gap-1">
                   <BarChart3 className="h-4 w-4 text-muted-foreground" />
                   <span>{dataset.rows.toLocaleString()} строк</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Download className="h-4 w-4 text-muted-foreground" />
-                  <span>{dataset.downloads}</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Calendar className="h-4 w-4 text-muted-foreground" />

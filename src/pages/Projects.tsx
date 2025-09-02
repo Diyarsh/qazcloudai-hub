@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Progress } from "@/components/ui/progress";
 import { 
   Search, 
   Plus, 
@@ -40,7 +39,6 @@ export default function Projects() {
       name: "Анализ клиентских данных",
       description: "Сегментация клиентов и прогнозирование поведения",
       status: "running",
-      progress: 67,
       owner: "Алексей Петров",
       collaborators: 3,
       created: "2024-01-15",
@@ -54,7 +52,6 @@ export default function Projects() {
       name: "Система рекомендаций",
       description: "ML-пайплайн для персонализированных рекомендаций",
       status: "completed",
-      progress: 100,
       owner: "Мария Иванова",
       collaborators: 5,
       created: "2024-01-10",
@@ -68,7 +65,6 @@ export default function Projects() {
       name: "Обработка документов",
       description: "Автоматическая классификация и извлечение данных",
       status: "draft",
-      progress: 15,
       owner: "Дмитрий Сидоров",
       collaborators: 2,
       created: "2024-01-12",
@@ -82,7 +78,6 @@ export default function Projects() {
       name: "Анализ настроений отзывов",
       description: "Мониторинг тональности клиентских отзывов",
       status: "error",
-      progress: 45,
       owner: "Екатерина Волкова",
       collaborators: 1,
       created: "2024-01-08",
@@ -96,7 +91,6 @@ export default function Projects() {
       name: "Прогнозирование продаж",
       description: "Временные ряды и предиктивная аналитика",
       status: "paused",
-      progress: 78,
       owner: "Андрей Козлов",
       collaborators: 4,
       created: "2024-01-05",
@@ -243,17 +237,6 @@ export default function Projects() {
                   <CardDescription className="text-sm leading-relaxed line-clamp-2">
                     {project.description}
                   </CardDescription>
-
-                  {/* Progress */}
-                  {project.progress > 0 && (
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-xs">
-                        <span className="text-muted-foreground">Прогресс</span>
-                        <span className="font-medium">{project.progress}%</span>
-                      </div>
-                      <Progress value={project.progress} className="h-2" />
-                    </div>
-                  )}
 
                   {/* Models */}
                   <div className="space-y-2">

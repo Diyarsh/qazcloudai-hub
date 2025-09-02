@@ -10,13 +10,13 @@ import {
   Search, 
   Filter, 
   Star, 
-  Download, 
-  Play, 
+  Download,
   Info,
   Image,
   MessageSquare,
   BarChart3,
-  Layers
+  Layers,
+  Mic
 } from "lucide-react";
 
 export default function Models() {
@@ -28,7 +28,7 @@ export default function Models() {
     { id: "all", name: "Все категории", icon: Layers },
     { id: "nlp", name: "Обработка текста", icon: MessageSquare },
     { id: "vision", name: "Компьютерное зрение", icon: Image },
-    { id: "speech", name: "Распознавание речи", icon: QazCloudLogo },
+    { id: "speech", name: "Распознавание речи", icon: Mic },
     { id: "analytics", name: "Аналитика", icon: BarChart3 }
   ];
 
@@ -48,9 +48,6 @@ export default function Models() {
       provider: "OpenAI",
       category: "nlp",
       description: "Самая продвинутая языковая модель с улучшенными возможностями",
-      version: "2024-04-09",
-      rating: 4.9,
-      downloads: 12500,
       status: "active",
       pricing: "0.01$/1K токенов",
       features: ["128K контекст", "Мультимодальность", "JSON mode"]
@@ -61,9 +58,6 @@ export default function Models() {
       provider: "Anthropic",
       category: "nlp",
       description: "Мощная модель для сложных задач анализа и рассуждения",
-      version: "20240229",
-      rating: 4.8,
-      downloads: 8700,
       status: "active",
       pricing: "0.015$/1K токенов",
       features: ["200K контекст", "Безопасность", "Логические рассуждения"]
@@ -74,9 +68,6 @@ export default function Models() {
       provider: "Meta",
       category: "nlp",
       description: "Открытая модель для коммерческого использования",
-      version: "2.0",
-      rating: 4.6,
-      downloads: 15200,
       status: "active",
       pricing: "Бесплатно",
       features: ["Открытый код", "70B параметров", "Коммерческая лицензия"]
@@ -87,9 +78,6 @@ export default function Models() {
       provider: "OpenAI",
       category: "vision",
       description: "Генерация изображений по текстовому описанию",
-      version: "3.0",
-      rating: 4.7,
-      downloads: 9800,
       status: "active",
       pricing: "0.04$/изображение",
       features: ["1024x1024", "Стилизация", "Редактирование"]
@@ -100,9 +88,6 @@ export default function Models() {
       provider: "OpenAI",
       category: "speech",
       description: "Распознавание и транскрипция речи на 99 языках",
-      version: "3.0",
-      rating: 4.8,
-      downloads: 6500,
       status: "active",
       pricing: "0.006$/минута",
       features: ["99 языков", "Высокая точность", "Временные метки"]
@@ -113,9 +98,6 @@ export default function Models() {
       provider: "Custom",
       category: "analytics",
       description: "Собственная модель для классификации документов",
-      version: "1.2",
-      rating: 4.5,
-      downloads: 450,
       status: "beta",
       pricing: "Внутреннее использование",
       features: ["Обученная модель", "Русский язык", "Высокая точность"]
@@ -243,17 +225,6 @@ export default function Models() {
                   <CardDescription className="text-sm leading-relaxed">
                     {model.description}
                   </CardDescription>
-                  
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">Версия:</span>
-                      <span className="font-medium">{model.version}</span>
-                    </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">Загрузки:</span>
-                      <span className="font-medium">{model.downloads.toLocaleString()}</span>
-                    </div>
-                  </div>
 
                   <div className="space-y-2">
                     <div className="text-xs font-medium text-muted-foreground">Возможности:</div>
@@ -268,12 +239,7 @@ export default function Models() {
 
                   <div className="flex gap-2 pt-2">
                     <Button size="sm" className="flex-1">
-                      <Play className="h-3 w-3 mr-1" />
-                      Тест
-                    </Button>
-                    <Button size="sm" variant="outline" className="flex-1">
-                      <Download className="h-3 w-3 mr-1" />
-                      Добавить
+                      Использовать
                     </Button>
                     <Button size="sm" variant="outline">
                       <Info className="h-3 w-3" />

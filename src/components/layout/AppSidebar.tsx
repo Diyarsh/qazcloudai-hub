@@ -65,12 +65,6 @@ export function AppSidebar() {
       group: "main"
     },
     {
-      titleKey: "navigation.pipelines",
-      url: "/pipelines",
-      icon: Network,
-      group: "main"
-    },
-    {
       titleKey: "navigation.laboratory",
       url: "/lab",
       icon: Cpu,
