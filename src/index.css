@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 40% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 40% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 40% 8%;
+
+    --primary: 214 68% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 214 68% 42%;
+
+    --muted: 214 32% 91%;
+    --muted-foreground: 215 16% 46%;
+
+    --accent: 214 32% 91%;
+    --accent-foreground: 214 68% 42%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 214 68% 42%;
+
+    /* Modern color palette */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 210 40% 8%;
+    
+    --info: 214 68% 42%;
+    --info-foreground: 0 0% 100%;
+
+    /* QazCloud AI HUB colors - темно-синий и cyan blue */
+    --ai-primary: 186 100% 44%;    /* cyan blue #06b6d4 */
+    --ai-secondary: 210 40% 8%;    /* темно-синий #1e293b */
+    --ai-accent: 199 95% 74%;      /* акцентный голубой #38bdf8 */
+    --ai-muted: 214 32% 91%;
+    --ai-dark: 222 84% 5%;         /* очень темно-синий #0f172a */
+    
+    /* Технологичные градиенты */
+    --gradient-primary: linear-gradient(135deg, hsl(222 84% 5%) 0%, hsl(186 100% 44%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(186 100% 44%) 0%, hsl(199 95% 74%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(199 95% 74%) 0%, hsl(186 100% 44%) 100%);
+    --gradient-surface: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(199 95% 95%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(222 84% 5%) 0%, hsl(210 40% 8%) 50%, hsl(186 100% 44%) 100%);
+    
+    /* Modern Shadows */
+    --shadow-ai: 0 10px 25px -5px hsl(221 83% 53% / 0.15), 0 10px 10px -5px hsl(221 83% 53% / 0.04);
+    --shadow-card: 0 4px 6px -1px hsl(210 40% 8% / 0.1), 0 2px 4px -1px hsl(210 40% 8% / 0.06);
+    --shadow-lg: 0 20px 25px -5px hsl(210 40% 8% / 0.1), 0 10px 10px -5px hsl(210 40% 8% / 0.04);
+    --shadow-xl: 0 25px 50px -12px hsl(210 40% 8% / 0.25);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 7% 98%;
+    --sidebar-foreground: 236 30% 19%;
+    --sidebar-primary: 214 68% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 7% 94%;
+    --sidebar-accent-foreground: 236 30% 19%;
+    --sidebar-border: 240 7% 88%;
+    --sidebar-ring: 214 68% 42%;
+  }
+
+  .dark {
+    --background: 210 40% 3%;
+    --foreground: 210 40% 98%;
+
+    --card: 210 40% 3%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 210 40% 3%;
+    --popover-foreground: 210 40% 98%;
+
+          --primary: 186 100% 44%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 27% 8%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 27% 8%;
+    --muted-foreground: 215 16% 46%;
+
+    --accent: 215 27% 8%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 27% 8%;
+    --input: 215 27% 8%;
+    --ring: 214 68% 42%;
+    
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+    
+    --ai-secondary: 215 16% 46%;
+    --ai-accent: 262 83% 58%;
+    --ai-muted: 215 27% 8%;
+    --ai-dark: 210 40% 98%;
+    
+    --gradient-surface: linear-gradient(135deg, hsl(210 40% 3%) 0%, hsl(215 27% 8%) 100%);
+    --shadow-card: 0 4px 6px -1px hsl(210 40% 3% / 0.5), 0 2px 4px -1px hsl(210 40% 3% / 0.3);
+    --shadow-lg: 0 20px 25px -5px hsl(210 40% 3% / 0.5), 0 10px 10px -5px hsl(210 40% 3% / 0.3);
+    
+    --sidebar-background: 215 27% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 214 68% 42%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 27% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 27% 12%;
+    --sidebar-ring: 214 68% 42%;
+  }
+
+  /* Developer Mode Palette - Cyberpunk Green Theme */
+  .dev-mode {
+    --primary: 158 100% 50%;
+    --ai-primary: 158 100% 50%;    /* cyberpunk green #00ff88 */
+    --ai-accent: 142 76% 56%;      /* зеленый акцент #10b981 */
+    --gradient-primary: linear-gradient(135deg, hsl(222 84% 5%) 0%, hsl(158 100% 50%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(158 100% 50%) 0%, hsl(142 76% 56%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(222 84% 5%) 0%, hsl(210 40% 8%) 50%, hsl(158 100% 50%) 100%);
+    --shadow-ai: 0 10px 25px -5px hsl(158 100% 50% / 0.25), 0 10px 10px -5px hsl(158 100% 50% / 0.1);
+  }
+
+  .dev-mode.dark {
+    --ai-primary: 158 100% 60%;
+    --ai-accent: 142 76% 56%;
+    --gradient-primary: linear-gradient(135deg, hsl(222 84% 5%) 0%, hsl(158 100% 60%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(158 100% 60%) 0%, hsl(142 76% 56%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(222 84% 5%) 0%, hsl(210 40% 8%) 50%, hsl(158 100% 60%) 100%);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

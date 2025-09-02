@@ -1,0 +1,55 @@
+{
+  "welcome": {
+    "title": "QazCloud AI-HUB",
+    "subtitle": "Unified access point to artificial intelligence capabilities. From idea to industrial implementation with technological sovereignty.",
+    "badge": "Centralized AI platform for digital sovereignty",
+    "connectToPlatform": "Connect to Platform",
+    "learnMore": "Learn More",
+    "getStarted": "AI-HUB",
+    "getStartedDescription": "Secure environment for AI development with group-level scaling",
+    "consultation": "Implementation Consultation",
+    "documentation": "Technical Documentation"
+  },
+  "advantages": {
+    "title": "Key Advantages",
+    "digitalSovereignty": "Digital Sovereignty",
+    "digitalSovereigntyDesc": "Technological independence and control over AI solutions",
+    "scalability": "Scalability", 
+    "scalabilityDesc": "From prototype to industrial implementation without limitations",
+    "security": "Security",
+    "securityDesc": "National IT circuit with high level of data protection"
+  },
+  "serviceModels": {
+    "title": "Service Models",
+    "selfService": "Self-Service",
+    "selfServiceDesc": "Independent work with platform and AI tools",
+    "aiAsService": "AI-as-a-Service", 
+    "aiAsServiceDesc": "Full support from idea to implementation with expert assistance",
+    "features": {
+      "gpuAccess": "Access to GPU cluster",
+      "modelLibrary": "Model library",
+      "autonomousDev": "Autonomous development",
+      "expertConsultation": "Expert consultations",
+      "customDev": "Custom development",
+      "techSupport": "Technical support"
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "modelCatalog": "Model Catalog",
+    "myProjects": "My Projects", 
+    "readySolutions": "Ready Solutions",
+    "pipelines": "Pipelines",
+    "laboratory": "Laboratory",
+    "mlops": "MLOps",
+    "datasets": "Datasets",
+    "documentation": "Documentation",
+    "settings": "Settings",
+    "devMode": "Dev Mode"
+  },
+  "groups": {
+    "main": "Main",
+    "development": "Development", 
+    "settings": "Settings"
+  }
+}

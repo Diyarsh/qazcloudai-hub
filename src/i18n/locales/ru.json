@@ -1,0 +1,55 @@
+{
+  "welcome": {
+    "title": "QazCloud AI-HUB",
+    "subtitle": "Единая точка доступа к возможностям искусственного интеллекта. От идеи до промышленного внедрения с технологическим суверенитетом.",
+    "badge": "Централизованная платформа ИИ для цифрового суверенитета",
+    "connectToPlatform": "Подключиться к платформе",
+    "learnMore": "Узнать больше",
+    "getStarted": "AI-HUB",
+    "getStartedDescription": "Безопасная среда для ИИ-разработки с масштабированием на уровне группы",
+    "consultation": "Консультация по внедрению",
+    "documentation": "Техническая документация"
+  },
+  "advantages": {
+    "title": "Ключевые преимущества",
+    "digitalSovereignty": "Цифровой суверенитет",
+    "digitalSovereigntyDesc": "Технологическая независимость и контроль над ИИ-решениями",
+    "scalability": "Масштабируемость",
+    "scalabilityDesc": "От прототипа до промышленного внедрения без ограничений",
+    "security": "Безопасность",
+    "securityDesc": "Национальный ИТ-контур с высоким уровнем защиты данных"
+  },
+  "serviceModels": {
+    "title": "Модели взаимодействия",
+    "selfService": "Self-Service",
+    "selfServiceDesc": "Самостоятельная работа с платформой и инструментами ИИ",
+    "aiAsService": "AI-as-a-Service",
+    "aiAsServiceDesc": "Полное сопровождение от идеи до внедрения с экспертной поддержкой",
+    "features": {
+      "gpuAccess": "Доступ к GPU кластеру",
+      "modelLibrary": "Библиотека моделей",
+      "autonomousDev": "Автономная разработка",
+      "expertConsultation": "Консультации экспертов",
+      "customDev": "Кастомная разработка",
+      "techSupport": "Техническая поддержка"
+    }
+  },
+  "navigation": {
+    "home": "Главная",
+    "modelCatalog": "Каталог моделей",
+    "myProjects": "Мои проекты",
+    "readySolutions": "Готовые решения",
+    "pipelines": "Пайплайны",
+    "laboratory": "Лаборатория",
+    "mlops": "MLOps",
+    "datasets": "Датасеты",
+    "documentation": "Документация",
+    "settings": "Настройки",
+    "devMode": "Dev Mode"
+  },
+  "groups": {
+    "main": "Основное",
+    "development": "Разработка",
+    "settings": "Настройки"
+  }
+}
