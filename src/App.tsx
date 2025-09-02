@@ -14,7 +14,6 @@ import NewProject from "./pages/NewProject";
 
 import Templates from "./pages/Templates";
 import Laboratory from "./pages/Laboratory";
-import MLOps from "./pages/MLOps";
 import Datasets from "./pages/Datasets";
 import Documentation from "./pages/Documentation";
 import Settings from "./pages/Settings";
@@ -61,12 +60,7 @@ const App = () => (
                    <Laboratory />
                  </AppLayout>
                } />
-              <Route path="/mlops" element={
-                <AppLayout>
-                  <MLOps />
-                </AppLayout>
-              } />
-              <Route path="/datasets" element={
+               <Route path="/datasets" element={
                 <AppLayout>
                   <Datasets />
                 </AppLayout>

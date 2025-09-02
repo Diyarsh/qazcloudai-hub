@@ -71,12 +71,6 @@ export function AppSidebar() {
       group: "development"
     },
     {
-      titleKey: "navigation.mlops",
-      url: "/mlops",
-      icon: GitBranch,
-      group: "development"
-    },
-    {
       titleKey: "navigation.datasets",
       url: "/datasets",
       icon: Layers,

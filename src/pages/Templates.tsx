@@ -98,10 +98,32 @@ const mockTemplates: Template[] = [
     tags: ['chatbot', 'rag', 'vector-search'],
     estimatedTime: '5-6 часов',
     preview: 'Векторная база знаний, семантический поиск, генерация ответов'
+  },
+  {
+    id: '7',
+    name: 'Бот отчет по командировкам',
+    description: 'Автоматизация создания и анализа отчетов по служебным командировкам',
+    category: 'Automation',
+    difficulty: 'Начинающий',
+    rating: 4.7,
+    tags: ['automation', 'reports', 'business'],
+    estimatedTime: '1-2 часа',
+    preview: 'Обработка документов, автоматическое заполнение форм, генерация отчетов'
+  },
+  {
+    id: '8',
+    name: 'Анализ нарушений на производстве',
+    description: 'Система мониторинга и анализа нарушений техники безопасности',
+    category: 'Safety',
+    difficulty: 'Средний',
+    rating: 4.8,
+    tags: ['safety', 'monitoring', 'analysis'],
+    estimatedTime: '2-3 часа',
+    preview: 'Компьютерное зрение для обнаружения нарушений, классификация событий'
   }
 ];
 
-const categories = ['Все', 'NLP', 'Computer Vision', 'Recommendation', 'Time Series', 'Anomaly Detection'];
+const categories = ['Все', 'NLP', 'Computer Vision', 'Recommendation', 'Time Series', 'Anomaly Detection', 'Automation', 'Safety'];
 const difficulties = ['Все', 'Начинающий', 'Средний', 'Продвинутый'];
 
 export default function Templates() {
@@ -195,7 +217,7 @@ export default function Templates() {
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {[
-          { title: "Всего шаблонов", value: "24", icon: FileText },
+          { title: "Всего инструментов", value: "26", icon: FileText },
           { title: "Популярных", value: "8", icon: Star }
         ].map((stat, index) => (
           <Card key={index}>
@@ -278,45 +300,10 @@ export default function Templates() {
                 {template.description}
               </CardDescription>
               
-              <div className="text-xs text-muted-foreground bg-muted p-2 rounded">
-                {template.preview}
-              </div>
-              
-              <div className="flex flex-wrap gap-1">
-                {template.tags.slice(0, 3).map((tag) => (
-                  <Badge key={tag} variant="outline" className="text-xs">
-                    <Tag className="h-3 w-3 mr-1" />
-                    {tag}
-                  </Badge>
-                ))}
-                {template.tags.length > 3 && (
-                  <Badge variant="outline" className="text-xs">
-                    +{template.tags.length - 3}
-                  </Badge>
-                )}
-              </div>
-              
-              <div className="grid grid-cols-1 gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 text-yellow-500 fill-current" />
-                  <span>{template.rating}</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  <span>{template.estimatedTime}</span>
-                </div>
-              </div>
-              
-              <div className="flex space-x-2 pt-2">
-                <Button size="sm" variant="outline" className="flex-1">
-                  <Eye className="h-4 w-4 mr-1" />
-                  Просмотр
-                </Button>
-                <Button size="sm" className="flex-1">
-                  <Copy className="h-4 w-4 mr-1" />
-                  Использовать
-                </Button>
-              </div>
+              <Button size="sm" className="w-full">
+                <Copy className="h-4 w-4 mr-1" />
+                Использовать
+              </Button>
             </CardContent>
           </Card>
         ))}
