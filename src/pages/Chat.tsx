@@ -128,9 +128,9 @@ export default function Chat() {
                           </h2>
                           
                         </div>
-                        <Button variant="outline" onClick={() => window.location.href = '/ai-studio'}>
+                        <Button variant="outline" size="sm" onClick={() => window.location.href = '/ai-studio'}>
                           Смотреть все
-                          <ArrowRight className="h-4 w-4 ml-2" />
+                          <ArrowRight className="h-3 w-3 ml-2" />
                         </Button>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -154,7 +154,7 @@ export default function Chat() {
                       description: "ИИ-модель для анализа документов",
                       provider: "QazCloud AI-HUB",
                       category: "Документы"
-                    }].map((model, index) => <div key={index} className="p-4 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer" onClick={() => {
+                    }].map((model, index) => <div key={index} className="p-4 rounded-lg border border-border/50 hover:border-primary/30 hover:bg-muted/50 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md" onClick={() => {
                       setInputMessage(`Расскажи подробнее о модели ${model.name}`);
                     }}>
                             <div className="space-y-3">
