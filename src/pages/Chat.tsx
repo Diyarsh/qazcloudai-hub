@@ -98,8 +98,59 @@ export default function Chat() {
                     </h1>
                   </div>
 
+                  {/* Chat Input */}
+                  <div className="w-full max-w-4xl">
+                    <div className="flex gap-3 items-end">
+                      {/* File Upload Button */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="outline" size="icon" className="flex-shrink-0">
+                            <Paperclip className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="start" className="w-48">
+                          <DropdownMenuItem>
+                            📁 My Drive
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            📎 Upload File
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            📷 Take a photo
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            🎬 Sample Media
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+
+                      {/* Text Input */}
+                      <div className="flex-1 relative">
+                        <Textarea
+                          value={inputMessage}
+                          onChange={(e) => setInputMessage(e.target.value)}
+                          onKeyPress={handleKeyPress}
+                          placeholder="Введите ваш вопрос..."
+                          className="min-h-[50px] max-h-[150px] resize-none pr-12"
+                          rows={1}
+                          disabled={isLoading}
+                        />
+                      </div>
+
+                      {/* Send Button */}
+                      <Button
+                        onClick={handleSendMessage}
+                        disabled={!inputMessage.trim() || isLoading}
+                        size="icon"
+                        className="flex-shrink-0"
+                      >
+                        <Send className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+
                   {/* Popular Models Section */}
-                  <div className="w-full max-w-5xl mt-12">
+                  <div className="w-full max-w-5xl mt-8">
                     <div className="space-y-6">
                       <div className="flex items-center justify-between">
                         <div>
@@ -232,58 +283,60 @@ export default function Chat() {
           </ScrollArea>
         </div>
 
-        {/* Chat Input */}
-        <div className="border-t bg-background">
-          <div className="max-w-4xl mx-auto p-6">
-            <div className="flex gap-3 items-end justify-center">
-              {/* File Upload Button */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon" className="flex-shrink-0">
-                    <Paperclip className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="start" className="w-48">
-                  <DropdownMenuItem>
-                    📁 My Drive
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    📎 Upload File
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    📷 Take a photo
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    🎬 Sample Media
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+        {/* Chat Input - only show when there are messages */}
+        {currentMessages.length > 0 && (
+          <div className="border-t bg-background">
+            <div className="max-w-4xl mx-auto p-6">
+              <div className="flex gap-3 items-end">
+                {/* File Upload Button */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="icon" className="flex-shrink-0">
+                      <Paperclip className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-48">
+                    <DropdownMenuItem>
+                      📁 My Drive
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      📎 Upload File
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      📷 Take a photo
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      🎬 Sample Media
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
 
-              {/* Text Input */}
-              <div className="flex-1 relative">
-                <Textarea
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Введите ваш вопрос..."
-                  className="min-h-[50px] max-h-[150px] resize-none pr-12"
-                  rows={1}
-                  disabled={isLoading}
-                />
+                {/* Text Input */}
+                <div className="flex-1 relative">
+                  <Textarea
+                    value={inputMessage}
+                    onChange={(e) => setInputMessage(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Введите ваш вопрос..."
+                    className="min-h-[50px] max-h-[150px] resize-none pr-12"
+                    rows={1}
+                    disabled={isLoading}
+                  />
+                </div>
+
+                {/* Send Button */}
+                <Button
+                  onClick={handleSendMessage}
+                  disabled={!inputMessage.trim() || isLoading}
+                  size="icon"
+                  className="flex-shrink-0"
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
               </div>
-
-              {/* Send Button */}
-              <Button
-                onClick={handleSendMessage}
-                disabled={!inputMessage.trim() || isLoading}
-                size="icon"
-                className="flex-shrink-0"
-              >
-                <Send className="h-4 w-4" />
-              </Button>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
