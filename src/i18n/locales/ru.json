@@ -35,14 +35,15 @@
     }
   },
   "navigation": {
-    "home": "Главная",
-    "modelCatalog": "Каталог моделей",
+    "chat": "Чат",
+    "aiStudio": "AI-Студия",
     "myProjects": "Мои проекты",
-    "readySolutions": "Готовые решения",
+    "history": "История",
     "laboratory": "Лаборатория",
     "documentation": "Документация",
     "settings": "Настройки",
-    "devMode": "Dev Mode"
+    "signOut": "Выход",
+    "devMode": "Режим разработчика"
   },
   "groups": {
     "main": "Основное",

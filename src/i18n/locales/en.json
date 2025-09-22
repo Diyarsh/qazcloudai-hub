@@ -35,14 +35,15 @@
     }
   },
   "navigation": {
-    "home": "Home",
-    "modelCatalog": "Model Catalog",
-    "myProjects": "My Projects",
-    "readySolutions": "Ready Solutions",
+    "chat": "Chat",
+    "aiStudio": "AI Studio",
+    "myProjects": "My Projects", 
+    "history": "History",
     "laboratory": "Laboratory",
     "documentation": "Documentation",
     "settings": "Settings",
-    "devMode": "Dev Mode"
+    "signOut": "Sign Out",
+    "devMode": "Developer Mode"
   },
   "groups": {
     "main": "Main",

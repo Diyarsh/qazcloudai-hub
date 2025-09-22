@@ -35,13 +35,14 @@
     }
   },
   "navigation": {
-    "home": "Басты бет",
-    "modelCatalog": "Модельдер каталогы",
+    "chat": "Чат",
+    "aiStudio": "AI-Студия",
     "myProjects": "Менің жобаларым",
-    "readySolutions": "Дайын шешімдер",
+    "history": "Тарих", 
     "laboratory": "Зертхана",
     "documentation": "Құжаттама",
     "settings": "Баптаулар",
+    "signOut": "Шығу",
     "devMode": "Әзірлеуші режимі"
   },
   "groups": {

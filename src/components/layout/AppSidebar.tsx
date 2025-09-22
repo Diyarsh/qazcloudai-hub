@@ -4,18 +4,19 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useDeveloperMode } from "@/hooks/useDeveloperMode";
 import { Switch } from "@/components/ui/switch";
 import { useTranslation } from 'react-i18next';
+import { useAuth } from "@/hooks/useAuth";
 import {
-  Database,
+  MessageSquare,
+  Sparkles,
   FolderOpen,
-  Settings,
+  Clock,
   Cpu,
-  Network,
-  Lightbulb,
-  GitBranch,
+  Settings,
   FileText,
-  Layers,
-  Code,
-  Package
+  LogOut,
+  User,
+  ChevronDown,
+  Code
 } from "lucide-react";
 
 import {
@@ -32,24 +33,37 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
 export function AppSidebar() {
   const { state } = useSidebar();
   const location = useLocation();
   const collapsed = state === "collapsed";
   const { isDeveloperMode, toggleDeveloperMode } = useDeveloperMode();
+  const { user, signOut } = useAuth();
   const { t } = useTranslation();
+  const [showSettings, setShowSettings] = useState(false);
+  const [showDocumentation, setShowDocumentation] = useState(false);
 
   const navigationItems = [
     {
-      titleKey: "navigation.home",
+      titleKey: "navigation.chat",
       url: "/dashboard",
-      icon: () => <CompanyLogo className="h-4 w-4" />,
+      icon: MessageSquare,
       group: "main"
     },
     {
-      titleKey: "navigation.modelCatalog",
-      url: "/models",
-      icon: Database,
+      titleKey: "navigation.aiStudio",
+      url: "/ai-studio",
+      icon: Sparkles,
       group: "main"
     },
     {
@@ -59,28 +73,17 @@ export function AppSidebar() {
       group: "main"
     },
     {
-      titleKey: "navigation.readySolutions",
-      url: "/templates",
-      icon: Package,
+      titleKey: "navigation.history",
+      url: "/history",
+      icon: Clock,
       group: "main"
     },
     {
       titleKey: "navigation.laboratory",
       url: "/lab",
       icon: Cpu,
-      group: "main"
-    },
-    {
-      titleKey: "navigation.documentation",
-      url: "/docs",
-      icon: FileText,
-      group: "settings"
-    },
-    {
-      titleKey: "navigation.settings",
-      url: "/settings",
-      icon: Settings,
-      group: "settings"
+      group: "main",
+      disabled: !isDeveloperMode
     }
   ];
 
@@ -104,6 +107,27 @@ export function AppSidebar() {
     return false;
   };
 
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
+  const getUserInitials = () => {
+    if (user?.email) {
+      return user.email.substring(0, 2).toUpperCase();
+    }
+    return "U";
+  };
+
+  const getUserName = () => {
+    if (user?.user_metadata?.full_name) {
+      return user.user_metadata.full_name;
+    }
+    if (user?.email) {
+      return user.email.split('@')[0];
+    }
+    return "Пользователь";
+  };
+
   return (
     <Sidebar className="border-r border-sidebar-border">
       <SidebarHeader className="border-b border-sidebar-border">
@@ -120,36 +144,37 @@ export function AppSidebar() {
 
       <SidebarContent>
         {Object.entries(groupedItems).map(([groupKey, items]) => {
-          // Скрываем группу разработка если режим разработчика отключен
-          if (groupKey === 'development' && !isDeveloperMode) {
-            return null;
-          }
-          
           return (
             <SidebarGroup key={groupKey}>
-              {!collapsed && (
-                <SidebarGroupLabel className="text-sidebar-foreground/70">
-                  {groupLabels[groupKey as keyof typeof groupLabels]}
-                </SidebarGroupLabel>
-              )}
               <SidebarGroupContent>
                 <SidebarMenu>
                   {items.map((item) => (
                     <SidebarMenuItem key={item.url}>
-                      <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                        <NavLink
-                          to={item.url}
-                          className={({ isActive }) =>
-                            `flex items-center gap-3 ${
-                              isActive
-                                ? "bg-sidebar-accent text-sidebar-primary"
-                                : "text-sidebar-foreground hover:bg-sidebar-accent/50"
-                            }`
-                          }
-                        >
-                          <item.icon className="h-4 w-4" />
-                          {!collapsed && <span>{t(item.titleKey)}</span>}
-                        </NavLink>
+                      <SidebarMenuButton 
+                        asChild={!item.disabled} 
+                        isActive={isActive(item.url)}
+                        className={item.disabled ? "opacity-50 cursor-not-allowed" : ""}
+                      >
+                        {item.disabled ? (
+                          <div className="flex items-center gap-3">
+                            <item.icon className="h-4 w-4" />
+                            {!collapsed && <span>{t(item.titleKey)}</span>}
+                          </div>
+                        ) : (
+                          <NavLink
+                            to={item.url}
+                            className={({ isActive }) =>
+                              `flex items-center gap-3 ${
+                                isActive
+                                  ? "bg-sidebar-accent text-sidebar-primary"
+                                  : "text-sidebar-foreground hover:bg-sidebar-accent/50"
+                              }`
+                            }
+                          >
+                            <item.icon className="h-4 w-4" />
+                            {!collapsed && <span>{t(item.titleKey)}</span>}
+                          </NavLink>
+                        )}
                       </SidebarMenuButton>
                     </SidebarMenuItem>
                   ))}
@@ -183,7 +208,69 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="border-t border-sidebar-border">
-        <div className="px-4 py-3 text-xs text-sidebar-foreground/50">
+        {/* User Profile Section */}
+        <div className="px-4 py-3">
+          {!collapsed ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger className="w-full">
+                <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-sidebar-accent/50 transition-colors">
+                  <Avatar className="h-8 w-8">
+                    <AvatarFallback className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground text-sm">
+                      {getUserInitials()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 text-left">
+                    <p className="text-sm font-medium text-sidebar-foreground">{getUserName()}</p>
+                    <p className="text-xs text-sidebar-foreground/70 truncate">{user?.email}</p>
+                  </div>
+                  <ChevronDown className="h-4 w-4 text-sidebar-foreground/70" />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem onClick={() => setShowSettings(true)}>
+                  <Settings className="h-4 w-4 mr-2" />
+                  {t('navigation.settings')}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setShowDocumentation(true)}>
+                  <FileText className="h-4 w-4 mr-2" />
+                  {t('navigation.documentation')}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  {t('navigation.signOut')}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar className="h-8 w-8 mx-auto">
+                  <AvatarFallback className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground text-sm">
+                    {getUserInitials()}
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuItem onClick={() => setShowSettings(true)}>
+                  <Settings className="h-4 w-4 mr-2" />
+                  {t('navigation.settings')}
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => setShowDocumentation(true)}>
+                  <FileText className="h-4 w-4 mr-2" />
+                  {t('navigation.documentation')}
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  {t('navigation.signOut')}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+        </div>
+
+        <div className="px-4 py-1 text-xs text-sidebar-foreground/50">
           {!collapsed && "v2.0.0 Enterprise"}
         </div>
       </SidebarFooter>

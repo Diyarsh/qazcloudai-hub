@@ -7,16 +7,12 @@ import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/hooks/useAuth";
 import { AppLayout } from "@/components/layout/AppLayout";
 import Index from "./pages/Index";
-import Dashboard from "./pages/Dashboard";
-import Models from "./pages/Models";
+import Chat from "./pages/Chat";
+import AIStudio from "./pages/AIStudio";
 import Projects from "./pages/Projects";
 import NewProject from "./pages/NewProject";
-
-import Templates from "./pages/Templates";
+import History from "./pages/History";
 import Laboratory from "./pages/Laboratory";
-import Datasets from "./pages/Datasets";
-import Documentation from "./pages/Documentation";
-import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,12 +32,12 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={
                 <AppLayout>
-                  <Dashboard />
+                  <Chat />
                 </AppLayout>
               } />
-              <Route path="/models" element={
+              <Route path="/ai-studio" element={
                 <AppLayout>
-                  <Models />
+                  <AIStudio />
                 </AppLayout>
               } />
               <Route path="/projects" element={
@@ -50,31 +46,16 @@ const App = () => (
                 </AppLayout>
               } />
               <Route path="/projects/new" element={<NewProject />} />
-              <Route path="/templates" element={
+              <Route path="/history" element={
                 <AppLayout>
-                  <Templates />
+                  <History />
                 </AppLayout>
               } />
-               <Route path="/lab" element={
+               <Route path="/lab/*" element={
                  <AppLayout>
                    <Laboratory />
                  </AppLayout>
                } />
-               <Route path="/datasets" element={
-                <AppLayout>
-                  <Datasets />
-                </AppLayout>
-              } />
-              <Route path="/docs" element={
-                <AppLayout>
-                  <Documentation />
-                </AppLayout>
-              } />
-              <Route path="/settings" element={
-                <AppLayout>
-                  <Settings />
-                </AppLayout>
-              } />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -54,13 +54,28 @@ export const useChatHistory = () => {
     setCurrentSessionId(sessionId);
   }, []);
 
+  const deleteSession = useCallback((sessionId: string) => {
+    setChatSessions(prev => prev.filter(session => session.id !== sessionId));
+    if (currentSessionId === sessionId) {
+      setCurrentSessionId(null);
+    }
+  }, [currentSessionId]);
+
+  // Convert array to object for compatibility
+  const sessionObject = chatSessions.reduce((acc, session) => {
+    acc[session.id] = session;
+    return acc;
+  }, {} as Record<string, ChatSession>);
+
   return {
-    chatSessions,
+    chatSessions: sessionObject,
     currentSessionId,
     getCurrentSession,
     createNewChat,
     addMessage,
     selectChat,
+    setCurrentSessionId,
+    deleteSession,
   };
 };
 
