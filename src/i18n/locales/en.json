@@ -37,10 +37,9 @@
   "navigation": {
     "home": "Home",
     "modelCatalog": "Model Catalog",
-    "myProjects": "My Projects", 
+    "myProjects": "My Projects",
     "readySolutions": "Ready Solutions",
     "laboratory": "Laboratory",
-    "datasets": "Datasets",
     "documentation": "Documentation",
     "settings": "Settings",
     "devMode": "Dev Mode"

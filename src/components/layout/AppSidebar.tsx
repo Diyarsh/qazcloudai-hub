@@ -68,13 +68,7 @@ export function AppSidebar() {
       titleKey: "navigation.laboratory",
       url: "/lab",
       icon: Cpu,
-      group: "development"
-    },
-    {
-      titleKey: "navigation.datasets",
-      url: "/datasets",
-      icon: Layers,
-      group: "development"
+      group: "main"
     },
     {
       titleKey: "navigation.documentation",
