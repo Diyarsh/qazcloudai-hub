@@ -6,78 +6,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
-import { useChatHistory } from "@/hooks/useChatHistory";
-import { ChatMain } from "@/components/chat/ChatMain";
 
 export default function NewProject() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("attachments");
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([]);
-  const [projectStarted, setProjectStarted] = useState(false);
-  
-  const {
-    chatSessions,
-    currentSessionId,
-    getCurrentSession,
-    createNewChat,
-    addMessage,
-    selectChat,
-  } = useChatHistory();
 
   const handleFileUpload = (fileName: string) => {
     setUploadedFiles(prev => [...prev, fileName]);
   };
-
-  const handleStartProject = () => {
-    setProjectStarted(true);
-    createNewChat("Начать разговор в этом проекте");
-  };
-
-  const handleSendMessage = (message: string, isUser: boolean) => {
-    if (!currentSessionId) {
-      const newSessionId = createNewChat(message);
-      addMessage(newSessionId, message, isUser);
-    } else {
-      addMessage(currentSessionId, message, isUser);
-    }
-  };
-
-  if (projectStarted) {
-    const currentSession = getCurrentSession();
-    return (
-      <div className="h-screen flex flex-col">
-        {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b bg-background">
-          <div className="flex items-center gap-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => navigate("/projects")}
-              className="text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Назад
-            </Button>
-            <h1 className="text-xl font-semibold">Новый проект</h1>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm">
-              <Upload className="h-4 w-4 mr-2" />
-              Инструкции
-            </Button>
-          </div>
-        </div>
-
-        {/* Chat Interface */}
-        <ChatMain
-          userName="Пользователь"
-          currentSessionId={currentSessionId}
-          messages={currentSession?.messages || []}
-          onSendMessage={handleSendMessage}
-        />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -110,13 +47,13 @@ export default function NewProject() {
               className="pr-12 h-12 text-base"
               onKeyPress={(e) => {
                 if (e.key === "Enter" && e.currentTarget.value.trim()) {
-                  handleStartProject();
+                  navigate("/projects");
                 }
               }}
             />
             <Button
               size="sm"
-              onClick={handleStartProject}
+              onClick={() => navigate("/projects")}
               className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 p-0"
             >
               <Send className="h-4 w-4" />
@@ -242,7 +179,7 @@ export default function NewProject() {
                   <p className="text-muted-foreground mb-4">
                     Пока нет активных чатов. Начните разговор выше.
                   </p>
-                  <Button onClick={handleStartProject}>
+                  <Button onClick={() => navigate("/projects")}>
                     Начать первый чат
                   </Button>
                 </CardContent>

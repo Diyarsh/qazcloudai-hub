@@ -94,88 +94,78 @@ export default function Chat() {
                   {/* Welcome Message */}
                   <div className="text-center space-y-4">
                     <h1 className="text-3xl font-bold text-foreground">
-                      {getUserName()}, Добро пожаловать в Мультиагентный ассистент
+                      Добро пожаловать в Мультиагентный ассистент
                     </h1>
-                    <p className="text-xl text-muted-foreground max-w-2xl">
-                      Задайте любой вопрос о работе с AI-платформой или попросите помощь в решении задач
-                    </p>
                   </div>
 
                   {/* Popular Models Section */}
                   <div className="w-full max-w-5xl mt-12">
-                    <Card>
-                      <CardHeader>
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <CardTitle className="flex items-center gap-2">
-                              <QazCloudLogo className="h-5 w-5" />
-                              Популярные модели
-                            </CardTitle>
-                            <CardDescription>
-                              Рекомендуемые ИИ-модели для ваших задач
-                            </CardDescription>
-                          </div>
-                          <Button variant="outline" onClick={() => window.location.href = '/ai-studio'}>
-                            Смотреть все
-                            <ArrowRight className="h-4 w-4 ml-2" />
-                          </Button>
+                    <div className="space-y-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h2 className="text-xl font-semibold flex items-center gap-2">
+                            <QazCloudLogo className="h-5 w-5" />
+                            Популярные модели
+                          </h2>
+                          <p className="text-muted-foreground mt-1">
+                            Рекомендуемые ИИ-модели для ваших задач
+                          </p>
                         </div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                          {[
-                            {
-                              name: "QazLLM-Ultra",
-                              description: "Суверенная языковая модель для корпоративного сектора",
-                              provider: "QazCloud AI-HUB",
-                              category: "Текст"
-                            },
-                            {
-                              name: "GPT-4 Turbo",
-                              description: "Продвинутая языковая модель для генерации текста",
-                              provider: "OpenAI",
-                              category: "Текст"
-                            },
-                            {
-                              name: "Claude 3.5 Sonnet",
-                              description: "Мощная модель для анализа и создания контента",
-                              provider: "Anthropic",
-                              category: "Текст"
-                            },
-                            {
-                              name: "DocAnalyzer AI",
-                              description: "ИИ-модель для анализа документов",
-                              provider: "QazCloud AI-HUB",
-                              category: "Документы"
-                            }
-                          ].map((model, index) => (
-                            <div key={index} className="p-4 border border-border rounded-lg hover:border-primary/50 transition-colors">
-                              <div className="space-y-3">
-                                <div className="flex items-center gap-2">
-                                  <div className="p-1 bg-primary rounded">
-                                    <QazCloudLogo className="h-3 w-3" />
-                                  </div>
-                                  <span className="font-medium text-sm">{model.name}</span>
+                        <Button variant="outline" onClick={() => window.location.href = '/ai-studio'}>
+                          Смотреть все
+                          <ArrowRight className="h-4 w-4 ml-2" />
+                        </Button>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {[
+                          {
+                            name: "QazLLM-Ultra",
+                            description: "Суверенная языковая модель для корпоративного сектора",
+                            provider: "QazCloud AI-HUB",
+                            category: "Текст"
+                          },
+                          {
+                            name: "GPT-4 Turbo",
+                            description: "Продвинутая языковая модель для генерации текста",
+                            provider: "OpenAI",
+                            category: "Текст"
+                          },
+                          {
+                            name: "Claude 3.5 Sonnet",
+                            description: "Мощная модель для анализа и создания контента",
+                            provider: "Anthropic",
+                            category: "Текст"
+                          },
+                          {
+                            name: "DocAnalyzer AI",
+                            description: "ИИ-модель для анализа документов",
+                            provider: "QazCloud AI-HUB",
+                            category: "Документы"
+                          }
+                        ].map((model, index) => (
+                          <div 
+                            key={index} 
+                            className="p-4 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
+                            onClick={() => {
+                              setInputMessage(`Расскажи подробнее о модели ${model.name}`);
+                            }}
+                          >
+                            <div className="space-y-3">
+                              <div className="flex items-center gap-2">
+                                <div className="p-1 bg-primary rounded">
+                                  <QazCloudLogo className="h-3 w-3" />
                                 </div>
-                                <p className="text-xs text-muted-foreground line-clamp-2">{model.description}</p>
-                                <div className="flex items-center justify-between text-xs">
-                                  <span className="text-muted-foreground">{model.provider}</span>
-                                </div>
-                                <Button 
-                                  size="sm" 
-                                  className="w-full"
-                                  onClick={() => {
-                                    setInputMessage(`Расскажи подробнее о модели ${model.name}`);
-                                  }}
-                                >
-                                  Использовать
-                                </Button>
+                                <span className="font-medium text-sm">{model.name}</span>
+                              </div>
+                              <p className="text-xs text-muted-foreground line-clamp-2">{model.description}</p>
+                              <div className="flex items-center justify-between text-xs">
+                                <span className="text-muted-foreground">{model.provider}</span>
                               </div>
                             </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -245,7 +235,7 @@ export default function Chat() {
         {/* Chat Input */}
         <div className="border-t bg-background">
           <div className="max-w-4xl mx-auto p-6">
-            <div className="flex gap-3 items-end">
+            <div className="flex gap-3 items-end justify-center">
               {/* File Upload Button */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

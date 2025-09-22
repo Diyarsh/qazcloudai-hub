@@ -42,6 +42,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -274,6 +276,80 @@ export function AppSidebar() {
           {!collapsed && "v2.0.0 Enterprise"}
         </div>
       </SidebarFooter>
+
+      {/* Settings Modal */}
+      <Dialog open={showSettings} onOpenChange={setShowSettings}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{t('navigation.settings')}</DialogTitle>
+          </DialogHeader>
+          <Tabs defaultValue="account" className="w-full">
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="account">Account</TabsTrigger>
+              <TabsTrigger value="appearance">Appearance</TabsTrigger>
+              <TabsTrigger value="behavior">Behavior</TabsTrigger>
+              <TabsTrigger value="data">Data Controls</TabsTrigger>
+            </TabsList>
+            <TabsContent value="account" className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="text-lg font-medium">Account Settings</h3>
+                <p className="text-sm text-muted-foreground">Manage your account information and preferences.</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="appearance" className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="text-lg font-medium">Appearance Settings</h3>
+                <p className="text-sm text-muted-foreground">Customize the look and feel of the interface.</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="behavior" className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="text-lg font-medium">AI Behavior</h3>
+                <p className="text-sm text-muted-foreground">Configure AI assistant behavior and preferences.</p>
+              </div>
+            </TabsContent>
+            <TabsContent value="data" className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="text-lg font-medium">Data Controls</h3>
+                <p className="text-sm text-muted-foreground">Manage your privacy and data settings.</p>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </DialogContent>
+      </Dialog>
+
+      {/* Documentation Modal */}
+      <Dialog open={showDocumentation} onOpenChange={setShowDocumentation}>
+        <DialogContent className="max-w-4xl max-h-[80vh]">
+          <DialogHeader>
+            <DialogTitle>{t('navigation.documentation')}</DialogTitle>
+          </DialogHeader>
+          <div className="grid grid-cols-4 gap-4 h-[60vh]">
+            <div className="col-span-1 border-r pr-4">
+              <nav className="space-y-2">
+                <h4 className="font-medium text-sm text-muted-foreground">Getting Started</h4>
+                <ul className="space-y-1 text-sm">
+                  <li><button className="hover:text-primary">Quick Start</button></li>
+                  <li><button className="hover:text-primary">Basic Features</button></li>
+                </ul>
+                <h4 className="font-medium text-sm text-muted-foreground mt-4">Advanced</h4>
+                <ul className="space-y-1 text-sm">
+                  <li><button className="hover:text-primary">API Reference</button></li>
+                  <li><button className="hover:text-primary">Integration Guide</button></li>
+                </ul>
+              </nav>
+            </div>
+            <div className="col-span-3">
+              <div className="prose prose-sm max-w-none">
+                <h1>Welcome to AI-HUB Documentation</h1>
+                <p>This is your comprehensive guide to using the AI-HUB platform effectively.</p>
+                <h2>Getting Started</h2>
+                <p>Learn the basics of navigating and using the platform.</p>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Sidebar>
   );
 }
