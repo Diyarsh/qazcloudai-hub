@@ -112,7 +112,7 @@ export default function Chat() {
                           </DropdownMenu>
                         </div>
                         
-                        <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder={placeholders[currentPlaceholder]} className="min-h-[80px] max-h-[200px] resize-none pl-12 pr-12 transition-all duration-300" rows={2} disabled={isLoading} />
+                        <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder={placeholders[currentPlaceholder]} rows={2} disabled={isLoading} className="min-h-[80px] max-h-[200px] resize-none pl-12 pr-12 transition-all duration-300 px-[20px]" />
                         
                         <div className="absolute right-3 bottom-2">
                           <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="h-8 w-8">
