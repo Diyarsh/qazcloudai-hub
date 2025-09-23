@@ -100,47 +100,51 @@ export default function Chat() {
 
                   {/* Chat Input */}
                   <div className="w-full max-w-4xl">
-                    <div className="flex gap-3 items-end">
-                      {/* File Upload Button */}
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="outline" size="icon" className="flex-shrink-0">
-                            <Paperclip className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="start" className="w-48">
-                          <DropdownMenuItem>
-                            📁 My Drive
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            📎 Upload File
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            📷 Take a photo
-                          </DropdownMenuItem>
-                          <DropdownMenuItem>
-                            🎬 Sample Media
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-
-                      {/* Text Input */}
-                      <div className="flex-1 relative">
-                        <Textarea 
-                          value={inputMessage} 
-                          onChange={e => setInputMessage(e.target.value)} 
-                          onKeyPress={handleKeyPress} 
-                          placeholder={placeholders[currentPlaceholder]}
-                          className="min-h-[50px] max-h-[150px] resize-none pr-12 transition-all duration-300" 
-                          rows={1} 
-                          disabled={isLoading} 
-                        />
+                    <div className="relative">
+                      <div className="absolute left-3 bottom-3 z-10">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-muted">
+                              <Paperclip className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="start" className="w-48">
+                            <DropdownMenuItem>
+                              📁 My Drive
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                              📎 Upload File
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                              📷 Take a photo
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                              🎬 Sample Media
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
                       </div>
-
-                      {/* Send Button */}
-                      <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="flex-shrink-0">
-                        <Send className="h-4 w-4" />
-                      </Button>
+                      
+                      <Textarea 
+                        value={inputMessage} 
+                        onChange={e => setInputMessage(e.target.value)} 
+                        onKeyPress={handleKeyPress} 
+                        placeholder={placeholders[currentPlaceholder]}
+                        className="min-h-[50px] max-h-[150px] resize-none pl-12 pr-12 transition-all duration-300" 
+                        rows={1} 
+                        disabled={isLoading} 
+                      />
+                      
+                      <div className="absolute right-3 bottom-3">
+                        <Button 
+                          onClick={handleSendMessage} 
+                          disabled={!inputMessage.trim() || isLoading} 
+                          size="icon"
+                          className="h-8 w-8"
+                        >
+                          <Send className="h-4 w-4" />
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div> : <div className="space-y-6">
@@ -191,47 +195,51 @@ export default function Chat() {
         {/* Chat Input - only show when there are messages */}
         {currentMessages.length > 0 && <div className="border-t bg-background">
             <div className="max-w-4xl mx-auto p-6">
-              <div className="flex gap-3 items-end">
-                {/* File Upload Button */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="icon" className="flex-shrink-0">
-                      <Paperclip className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-48">
-                    <DropdownMenuItem>
-                      📁 My Drive
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      📎 Upload File
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      📷 Take a photo
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      🎬 Sample Media
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-
-                {/* Text Input */}
-                <div className="flex-1 relative">
-                  <Textarea 
-                    value={inputMessage} 
-                    onChange={e => setInputMessage(e.target.value)} 
-                    onKeyPress={handleKeyPress} 
-                    placeholder={placeholders[currentPlaceholder]}
-                    className="min-h-[50px] max-h-[150px] resize-none pr-12 transition-all duration-300" 
-                    rows={1} 
-                    disabled={isLoading} 
-                  />
+              <div className="relative">
+                <div className="absolute left-3 bottom-3 z-10">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-muted">
+                        <Paperclip className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start" className="w-48">
+                      <DropdownMenuItem>
+                        📁 My Drive
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        📎 Upload File
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        📷 Take a photo
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        🎬 Sample Media
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                 </div>
-
-                {/* Send Button */}
-                <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="flex-shrink-0">
-                  <Send className="h-4 w-4" />
-                </Button>
+                
+                <Textarea 
+                  value={inputMessage} 
+                  onChange={e => setInputMessage(e.target.value)} 
+                  onKeyPress={handleKeyPress} 
+                  placeholder={placeholders[currentPlaceholder]}
+                  className="min-h-[50px] max-h-[150px] resize-none pl-12 pr-12 transition-all duration-300" 
+                  rows={1} 
+                  disabled={isLoading} 
+                />
+                
+                <div className="absolute right-3 bottom-3">
+                  <Button 
+                    onClick={handleSendMessage} 
+                    disabled={!inputMessage.trim() || isLoading} 
+                    size="icon"
+                    className="h-8 w-8"
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>}
