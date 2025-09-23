@@ -97,18 +97,20 @@ export default function Chat() {
                                 <Paperclip className="h-4 w-4" />
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="start" className="w-48">
+                            <DropdownMenuContent align="start" className="w-56">
+                              <DropdownMenuItem className="bg-primary/10 text-primary font-medium">
+                                📎 Загрузить документ
+                                <Badge variant="secondary" className="ml-auto text-xs">Рекомендуется</Badge>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem className="bg-primary/10 text-primary font-medium">
+                                🎤 Загрузить аудио
+                                <Badge variant="secondary" className="ml-auto text-xs">Транскрипция</Badge>
+                              </DropdownMenuItem>
                               <DropdownMenuItem>
                                 📁 My Drive
                               </DropdownMenuItem>
                               <DropdownMenuItem>
-                                📎 Upload File
-                              </DropdownMenuItem>
-                              <DropdownMenuItem>
-                                📷 Take a photo
-                              </DropdownMenuItem>
-                              <DropdownMenuItem>
-                                🎬 Sample Media
+                                📷 Сделать фото
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
@@ -227,18 +229,20 @@ export default function Chat() {
                         <Paperclip className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="start" className="w-48">
+                    <DropdownMenuContent align="start" className="w-56">
+                      <DropdownMenuItem className="bg-primary/10 text-primary font-medium">
+                        📎 Загрузить документ
+                        <Badge variant="secondary" className="ml-auto text-xs">PDF, DOCX</Badge>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="bg-primary/10 text-primary font-medium">
+                        🎤 Загрузить аудио
+                        <Badge variant="secondary" className="ml-auto text-xs">MP3, WAV</Badge>
+                      </DropdownMenuItem>
                       <DropdownMenuItem>
                         📁 My Drive
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        📎 Upload File
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        📷 Take a photo
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        🎬 Sample Media
+                        📷 Сделать фото
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

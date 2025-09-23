@@ -4,14 +4,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, Star, Filter, Cpu, Brain, FileText, BarChart3, Bot, Zap } from "lucide-react";
+import { Search, Star, Filter, Cpu, Brain, FileText, BarChart3, Bot, Zap, User } from "lucide-react";
 import { QazCloudLogo } from "@/components/ui/qazcloud-logo";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 
 export default function AIStudio() {
   const [searchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const navigate = useNavigate();
 
   // Set initial category from URL params
   useEffect(() => {
@@ -84,64 +85,82 @@ export default function AIStudio() {
     }
   ];
 
-  const solutions = [
+  const developersolutions = [
     {
       id: 1,
       name: "Электронное правительство чат-бот",
       description: "Автоматические ответы на вопросы граждан по государственным услугам",
-      category: "assistant",
+      category: "Корпоративный ассистент",
+      company: "QazTech Solutions",
       icon: Bot,
+      users: "45К",
+      rating: 4.8,
       tags: ["ЭГов", "Граждане", "24/7"]
     },
     {
       id: 2,
       name: "Анализ контрактов ГЗК",
       description: "Обработка документов государственных закупок",
-      category: "document",
+      category: "Документы", 
+      company: "KazLegal AI",
       icon: FileText,
+      users: "12К",
+      rating: 4.9,
       tags: ["Контракты", "ГЗК", "Комплаенс"]
     },
     {
       id: 3,
       name: "HR-бот для Самрук-Казына",
       description: "Автоматизация HR-процессов в госкорпорациях",
-      category: "assistant",
+      category: "Корпоративный ассистент",
+      company: "Samruk-Kazyna Digital",
       icon: Bot,
+      users: "8К",
+      rating: 4.7,
       tags: ["HR", "Корпоративный", "Автоматизация"]
     },
     {
       id: 4,
       name: "Мониторинг месторождений",
       description: "ИИ-система контроля промышленных объектов",
-      category: "industrial",
+      category: "Промышленные",
+      company: "KazMining Tech",
       icon: BarChart3,
+      users: "3К",
+      rating: 4.6,
       tags: ["Горнодобыча", "IoT", "Безопасность"]
     },
     {
       id: 5,
       name: "Код-ревьювер QazDev",
       description: "Автоматическая проверка кода по казахстанским стандартам",
-      category: "code",
+      category: "Код",
+      company: "QazDev Studio",
       icon: Zap,
+      users: "15К",
+      rating: 4.8,
       tags: ["Код-ревью", "ГОСТ", "Качество"]
     },
     {
       id: 6,
       name: "Налоговый ассистент",
       description: "Помощник по налоговому законодательству РК",
-      category: "document",
+      category: "Документы",
+      company: "TaxBot KZ",
       icon: FileText,
+      users: "25К", 
+      rating: 4.9,
       tags: ["Налоги", "Законодательство", "КНК"]
     }
   ];
 
   const categories = [
-    { id: "all", name: "Все", count: models.length + solutions.length },
+    { id: "all", name: "Все", count: models.length + developersolutions.length },
     { id: "llm", name: "Языковые модели", count: models.filter(m => m.category === "llm").length },
-    { id: "assistant", name: "Корпоративный ассистент", count: models.filter(m => m.category === "assistant").length + solutions.filter(s => s.category === "assistant").length },
-    { id: "document", name: "Документы", count: models.filter(m => m.category === "document").length + solutions.filter(s => s.category === "document").length },
-    { id: "code", name: "Код", count: models.filter(m => m.category === "code").length + solutions.filter(s => s.category === "code").length },
-    { id: "industrial", name: "Промышленные", count: models.filter(m => m.category === "industrial").length + solutions.filter(s => s.category === "industrial").length }
+    { id: "assistant", name: "Корпоративный ассистент", count: models.filter(m => m.category === "assistant").length + developersolutions.filter(s => s.category === "Корпоративный ассистент").length },
+    { id: "document", name: "Документы", count: models.filter(m => m.category === "document").length + developersolutions.filter(s => s.category === "Документы").length },
+    { id: "code", name: "Код", count: models.filter(m => m.category === "code").length + developersolutions.filter(s => s.category === "Код").length },
+    { id: "industrial", name: "Промышленные", count: models.filter(m => m.category === "industrial").length + developersolutions.filter(s => s.category === "Промышленные").length }
   ];
 
   const filteredModels = models.filter(model => {
@@ -151,7 +170,7 @@ export default function AIStudio() {
     return matchesSearch && matchesCategory;
   });
 
-  const filteredSolutions = solutions.filter(solution => {
+  const filteredSolutions = developersolutions.filter(solution => {
     const matchesSearch = solution.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          solution.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "all" || solution.category === selectedCategory;
@@ -255,31 +274,47 @@ export default function AIStudio() {
         <TabsContent value="solutions">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredSolutions.map((solution) => (
-              <Card key={solution.id} className="hover:shadow-md transition-shadow">
+              <Card key={solution.id} className="hover:shadow-lg transition-all cursor-pointer group">
                 <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-primary/10 rounded-lg">
-                      <solution.icon className="h-6 w-6 text-primary" />
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-gradient-to-r from-primary to-primary/80">
+                        <solution.icon className="h-6 w-6 text-white" />
+                      </div>
+                      <div>
+                        <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                          {solution.name}
+                        </CardTitle>
+                        <p className="text-sm text-muted-foreground">{solution.company}</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-lg">{solution.name}</CardTitle>
-                    </div>
+                    <Badge variant="outline">{solution.category}</Badge>
                   </div>
-                  <CardDescription className="text-sm">
-                    {solution.description}
-                  </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex flex-wrap gap-1">
-                    {solution.tags.map((tag, index) => (
-                      <Badge key={index} variant="outline" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-4">{solution.description}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <User className="h-4 w-4" />
+                        {solution.users}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Star className="h-4 w-4 text-yellow-500" />
+                        {solution.rating}
+                      </span>
+                    </div>
+                    <Button 
+                      size="sm"
+                      onClick={() => {
+                        if (solution.name === "HR-бот для Самрук-Казына") {
+                          navigate("/hr-bot");
+                        }
+                      }}
+                    >
+                      Использовать
+                    </Button>
                   </div>
-                  <Button className="w-full">
-                    Использовать
-                  </Button>
                 </CardContent>
               </Card>
             ))}

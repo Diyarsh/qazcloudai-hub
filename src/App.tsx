@@ -8,6 +8,8 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { AppLayout } from "@/components/layout/AppLayout";
 import Index from "./pages/Index";
 import Chat from "./pages/Chat";
+import HRBot from "./pages/HRBot";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AIStudio from "./pages/AIStudio";
 import Projects from "./pages/Projects";
 import NewProject from "./pages/NewProject";
@@ -31,25 +33,42 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={
-                <AppLayout>
-                  <Chat />
-                </AppLayout>
+                <ProtectedRoute>
+                  <AppLayout>
+                    <Chat />
+                  </AppLayout>
+                </ProtectedRoute>
               } />
               <Route path="/ai-studio" element={
-                <AppLayout>
-                  <AIStudio />
-                </AppLayout>
+                <ProtectedRoute>
+                  <AppLayout>
+                    <AIStudio />
+                  </AppLayout>
+                </ProtectedRoute>
               } />
               <Route path="/projects" element={
-                <AppLayout>
-                  <Projects />
-                </AppLayout>
+                <ProtectedRoute>
+                  <AppLayout>
+                    <Projects />
+                  </AppLayout>
+                </ProtectedRoute>
               } />
-              <Route path="/projects/new" element={<NewProject />} />
+              <Route path="/projects/new" element={
+                <ProtectedRoute>
+                  <NewProject />
+                </ProtectedRoute>
+              } />
               <Route path="/history" element={
-                <AppLayout>
-                  <History />
-                </AppLayout>
+                <ProtectedRoute>
+                  <AppLayout>
+                    <History />
+                  </AppLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/hr-bot" element={
+                <ProtectedRoute>
+                  <HRBot />
+                </ProtectedRoute>
               } />
                <Route path="/lab/*" element={
                  <AppLayout>
