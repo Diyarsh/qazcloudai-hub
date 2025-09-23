@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Send, Paperclip, Bot, User, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +14,25 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 export default function Chat() {
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
+  
+  const placeholders = [
+    "Задать вопрос по документу...",
+    "Записать голосовое сообщение...", 
+    "Получить финансовую консультацию...",
+    "Юридический анализ...",
+    "HR консультация...",
+    "Введите ваш вопрос..."
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
   const {
     user
   } = useAuth();
@@ -107,64 +126,21 @@ export default function Chat() {
 
                       {/* Text Input */}
                       <div className="flex-1 relative">
-                        <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder="Введите ваш вопрос..." className="min-h-[50px] max-h-[150px] resize-none pr-12" rows={1} disabled={isLoading} />
+                        <Textarea 
+                          value={inputMessage} 
+                          onChange={e => setInputMessage(e.target.value)} 
+                          onKeyPress={handleKeyPress} 
+                          placeholder={placeholders[currentPlaceholder]}
+                          className="min-h-[50px] max-h-[150px] resize-none pr-12 transition-all duration-300" 
+                          rows={1} 
+                          disabled={isLoading} 
+                        />
                       </div>
 
                       {/* Send Button */}
                       <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="flex-shrink-0">
                         <Send className="h-4 w-4" />
                       </Button>
-                    </div>
-                  </div>
-
-                  {/* Helpful Suggestions */}
-                  <div className="w-full max-w-4xl mt-8">
-                    <div className="space-y-4">
-                      <h2 className="text-lg font-medium text-center text-muted-foreground">
-                        Подсказки
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {[
-                          {
-                            title: "Задать вопрос по документу",
-                            icon: "📄",
-                            prompt: "Помоги мне проанализировать документ"
-                          },
-                          {
-                            title: "Записать голосовое сообщение",
-                            icon: "🎤",
-                            prompt: "Как записать голосовое сообщение?"
-                          },
-                          {
-                            title: "Получить финансовую консультацию",
-                            icon: "💰",
-                            prompt: "Нужна финансовая консультация"
-                          },
-                          {
-                            title: "Юридический анализ",
-                            icon: "⚖️",
-                            prompt: "Требуется юридический анализ"
-                          },
-                          {
-                            title: "HR консультация",
-                            icon: "👥",
-                            prompt: "Нужна HR консультация"
-                          }
-                        ].map((suggestion, index) => (
-                          <div
-                            key={index}
-                            className="p-4 rounded-xl border border-border/50 hover:border-primary/30 hover:bg-muted/30 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md"
-                            onClick={() => {
-                              setInputMessage(suggestion.prompt);
-                            }}
-                          >
-                            <div className="flex items-center gap-3">
-                              <span className="text-2xl">{suggestion.icon}</span>
-                              <span className="font-medium text-sm">{suggestion.title}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 </div> : <div className="space-y-6">
@@ -241,7 +217,15 @@ export default function Chat() {
 
                 {/* Text Input */}
                 <div className="flex-1 relative">
-                  <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder="Введите ваш вопрос..." className="min-h-[50px] max-h-[150px] resize-none pr-12" rows={1} disabled={isLoading} />
+                  <Textarea 
+                    value={inputMessage} 
+                    onChange={e => setInputMessage(e.target.value)} 
+                    onKeyPress={handleKeyPress} 
+                    placeholder={placeholders[currentPlaceholder]}
+                    className="min-h-[50px] max-h-[150px] resize-none pr-12 transition-all duration-300" 
+                    rows={1} 
+                    disabled={isLoading} 
+                  />
                 </div>
 
                 {/* Send Button */}
