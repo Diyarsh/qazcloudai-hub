@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Send, Paperclip, Bot, User, Loader2 } from "lucide-react";
+import { Send, Paperclip, Bot, User, Loader2, FileText, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,11 +11,13 @@ import { useAuth } from "@/hooks/useAuth";
 import { QazCloudLogo } from "@/components/ui/qazcloud-logo";
 import { ArrowRight } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { useNavigate } from "react-router-dom";
 export default function Chat() {
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
   const placeholders = ["Задать вопрос по документу...", "Записать голосовое сообщение...", "Получить финансовую консультацию...", "Юридический анализ...", "HR консультация...", "Введите ваш вопрос..."];
+  const navigate = useNavigate();
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentPlaceholder(prev => (prev + 1) % placeholders.length);
@@ -120,6 +122,54 @@ export default function Chat() {
                           </Button>
                         </div>
                       </div>
+                  </div>
+
+                  {/* Quick Action Cards */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl w-full mt-8">
+                    <Card 
+                      className="cursor-pointer hover:bg-muted/50 transition-colors border-muted/50"
+                      onClick={() => navigate('/ai-studio?category=document')}
+                    >
+                      <CardContent className="flex items-center gap-3 p-4">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <FileText className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-sm">Обработка документов</h3>
+                          <p className="text-xs text-muted-foreground">Анализ и извлечение данных</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <Card 
+                      className="cursor-pointer hover:bg-muted/50 transition-colors border-muted/50"
+                      onClick={() => navigate('/ai-studio?category=bot')}
+                    >
+                      <CardContent className="flex items-center gap-3 p-4">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <Bot className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-sm">Боты</h3>
+                          <p className="text-xs text-muted-foreground">Автоматизация и чат-боты</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <Card 
+                      className="cursor-pointer hover:bg-muted/50 transition-colors border-muted/50"
+                      onClick={() => navigate('/ai-studio?category=all')}
+                    >
+                      <CardContent className="flex items-center gap-3 p-4">
+                        <div className="p-2 bg-primary/10 rounded-lg">
+                          <Settings className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <h3 className="font-medium text-sm">От Разработчиков</h3>
+                          <p className="text-xs text-muted-foreground">Готовые решения и модели</p>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
                 </div> : <div className="space-y-6">
                   {currentMessages.map(message => <div key={message.id} className={`flex gap-4 ${message.isUser ? "justify-end" : "justify-start"}`}>
