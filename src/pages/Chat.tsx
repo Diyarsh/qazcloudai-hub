@@ -117,59 +117,53 @@ export default function Chat() {
                     </div>
                   </div>
 
-                  {/* Popular Models Section */}
-                  <div className="w-full max-w-5xl mt-8">
-                    <div className="space-y-6">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h2 className="text-xl font-semibold flex items-center gap-2">
-                            <QazCloudLogo className="h-5 w-5" />
-                            Популярные модели
-                          </h2>
-                          
-                        </div>
-                        <Button variant="outline" size="sm" onClick={() => window.location.href = '/ai-studio'}>
-                          Смотреть все
-                          <ArrowRight className="h-3 w-3 ml-2" />
-                        </Button>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        {[{
-                      name: "QazLLM-Ultra",
-                      description: "Суверенная языковая модель для корпоративного сектора",
-                      provider: "QazCloud AI-HUB",
-                      category: "Текст"
-                    }, {
-                      name: "GPT-4 Turbo",
-                      description: "Продвинутая языковая модель для генерации текста",
-                      provider: "OpenAI",
-                      category: "Текст"
-                    }, {
-                      name: "Claude 3.5 Sonnet",
-                      description: "Мощная модель для анализа и создания контента",
-                      provider: "Anthropic",
-                      category: "Текст"
-                    }, {
-                      name: "DocAnalyzer AI",
-                      description: "ИИ-модель для анализа документов",
-                      provider: "QazCloud AI-HUB",
-                      category: "Документы"
-                    }].map((model, index) => <div key={index} className="p-4 rounded-lg border border-border/50 hover:border-primary/30 hover:bg-muted/50 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md" onClick={() => {
-                      setInputMessage(`Расскажи подробнее о модели ${model.name}`);
-                    }}>
-                            <div className="space-y-3">
-                              <div className="flex items-center gap-2">
-                                <div className="p-1 bg-primary rounded">
-                                  <QazCloudLogo className="h-3 w-3" />
-                                </div>
-                                <span className="font-medium text-sm">{model.name}</span>
-                              </div>
-                              <p className="text-xs text-muted-foreground line-clamp-2">{model.description}</p>
-                              <div className="flex items-center justify-between text-xs">
-                                <span className="text-muted-foreground">{model.provider}</span>
-                              </div>
+                  {/* Helpful Suggestions */}
+                  <div className="w-full max-w-4xl mt-8">
+                    <div className="space-y-4">
+                      <h2 className="text-lg font-medium text-center text-muted-foreground">
+                        Подсказки
+                      </h2>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {[
+                          {
+                            title: "Задать вопрос по документу",
+                            icon: "📄",
+                            prompt: "Помоги мне проанализировать документ"
+                          },
+                          {
+                            title: "Записать голосовое сообщение",
+                            icon: "🎤",
+                            prompt: "Как записать голосовое сообщение?"
+                          },
+                          {
+                            title: "Получить финансовую консультацию",
+                            icon: "💰",
+                            prompt: "Нужна финансовая консультация"
+                          },
+                          {
+                            title: "Юридический анализ",
+                            icon: "⚖️",
+                            prompt: "Требуется юридический анализ"
+                          },
+                          {
+                            title: "HR консультация",
+                            icon: "👥",
+                            prompt: "Нужна HR консультация"
+                          }
+                        ].map((suggestion, index) => (
+                          <div
+                            key={index}
+                            className="p-4 rounded-xl border border-border/50 hover:border-primary/30 hover:bg-muted/30 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md"
+                            onClick={() => {
+                              setInputMessage(suggestion.prompt);
+                            }}
+                          >
+                            <div className="flex items-center gap-3">
+                              <span className="text-2xl">{suggestion.icon}</span>
+                              <span className="font-medium text-sm">{suggestion.title}</span>
                             </div>
-                          </div>)}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
