@@ -15,24 +15,13 @@ export default function Chat() {
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
-  
-  const placeholders = [
-    "Задать вопрос по документу...",
-    "Записать голосовое сообщение...", 
-    "Получить финансовую консультацию...",
-    "Юридический анализ...",
-    "HR консультация...",
-    "Введите ваш вопрос..."
-  ];
-
+  const placeholders = ["Задать вопрос по документу...", "Записать голосовое сообщение...", "Получить финансовую консультацию...", "Юридический анализ...", "HR консультация...", "Введите ваш вопрос..."];
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentPlaceholder((prev) => (prev + 1) % placeholders.length);
+      setCurrentPlaceholder(prev => (prev + 1) % placeholders.length);
     }, 3000);
-    
     return () => clearInterval(interval);
   }, []);
-
   const {
     user
   } = useAuth();
@@ -93,9 +82,7 @@ export default function Chat() {
               {currentMessages.length === 0 ? <div className="flex flex-col items-center justify-center h-full min-h-[60vh] space-y-8">
                   {/* Welcome Message */}
                   <div className="text-center space-y-4">
-                    <h1 className="text-3xl font-bold text-foreground">
-                      Добро пожаловать в Мультиагентный ассистент
-                    </h1>
+                    <h1 className="text-3xl font-bold text-foreground">Добро пожаловать User</h1>
                   </div>
 
                   {/* Chat Input */}
@@ -125,23 +112,10 @@ export default function Chat() {
                         </DropdownMenu>
                       </div>
                       
-                      <Textarea 
-                        value={inputMessage} 
-                        onChange={e => setInputMessage(e.target.value)} 
-                        onKeyPress={handleKeyPress} 
-                        placeholder={placeholders[currentPlaceholder]}
-                        className="min-h-[50px] max-h-[150px] resize-none pl-12 pr-12 transition-all duration-300" 
-                        rows={1} 
-                        disabled={isLoading} 
-                      />
+                      <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder={placeholders[currentPlaceholder]} className="min-h-[50px] max-h-[150px] resize-none pl-12 pr-12 transition-all duration-300" rows={1} disabled={isLoading} />
                       
                       <div className="absolute right-3 bottom-3">
-                        <Button 
-                          onClick={handleSendMessage} 
-                          disabled={!inputMessage.trim() || isLoading} 
-                          size="icon"
-                          className="h-8 w-8"
-                        >
+                        <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="h-8 w-8">
                           <Send className="h-4 w-4" />
                         </Button>
                       </div>
@@ -220,23 +194,10 @@ export default function Chat() {
                   </DropdownMenu>
                 </div>
                 
-                <Textarea 
-                  value={inputMessage} 
-                  onChange={e => setInputMessage(e.target.value)} 
-                  onKeyPress={handleKeyPress} 
-                  placeholder={placeholders[currentPlaceholder]}
-                  className="min-h-[50px] max-h-[150px] resize-none pl-12 pr-12 transition-all duration-300" 
-                  rows={1} 
-                  disabled={isLoading} 
-                />
+                <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder={placeholders[currentPlaceholder]} className="min-h-[50px] max-h-[150px] resize-none pl-12 pr-12 transition-all duration-300" rows={1} disabled={isLoading} />
                 
                 <div className="absolute right-3 bottom-3">
-                  <Button 
-                    onClick={handleSendMessage} 
-                    disabled={!inputMessage.trim() || isLoading} 
-                    size="icon"
-                    className="h-8 w-8"
-                  >
+                  <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="h-8 w-8">
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
