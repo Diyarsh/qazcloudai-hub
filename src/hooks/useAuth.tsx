@@ -23,6 +23,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [demoUser, setDemoUser] = useState<any>(null);
 
   useEffect(() => {
+    // Check for saved demo user in localStorage
+    const savedDemoUser = localStorage.getItem('demoUser');
+    if (savedDemoUser) {
+      const parsedUser = JSON.parse(savedDemoUser);
+      setDemoUser(parsedUser);
+      setUser(parsedUser);
+      console.log('Loaded demo user from localStorage:', parsedUser);
+    }
+
     // Only attempt auth if Supabase is configured
     if (!isSupabaseConfigured || !supabase) {
       setLoading(false);
@@ -52,10 +61,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     if (supabase) {
       await supabase.auth.signOut();
     }
-    // Clear demo user
+    // Clear demo user from state and localStorage
+    localStorage.removeItem('demoUser');
     setDemoUser(null);
     setUser(null);
     setSession(null);
+    console.log('User signed out');
   };
 
   const signInDemo = (email: string) => {
@@ -66,8 +77,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         full_name: email.split('@')[0]
       }
     };
+    
+    // Save to localStorage for persistence
+    localStorage.setItem('demoUser', JSON.stringify(mockUser));
     setDemoUser(mockUser);
     setUser(mockUser as any);
+    console.log('Demo user signed in:', mockUser);
   };
 
   const value = {
