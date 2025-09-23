@@ -82,7 +82,7 @@ export default function Chat() {
               {currentMessages.length === 0 ? <div className="flex flex-col items-center justify-center h-full min-h-[60vh] space-y-8">
                   {/* Welcome Message */}
                   <div className="text-center space-y-4">
-                    <h1 className="text-3xl font-bold text-foreground">Добро пожаловать User</h1>
+                    <h1 className="text-3xl font-bold text-foreground">AI-HUB</h1>
                   </div>
 
                   {/* Chat Input */}
