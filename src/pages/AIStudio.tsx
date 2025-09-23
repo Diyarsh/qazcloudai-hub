@@ -165,7 +165,7 @@ export default function AIStudio() {
       <div className="space-y-4">
         <div>
           <h1 className="text-3xl font-bold text-foreground">AI-Студия</h1>
-          <p className="text-muted-foreground">Библиотека моделей и готовых решений</p>
+          <p className="text-muted-foreground">Библиотека AI-решений</p>
         </div>
 
         {/* Search and Filters */}
@@ -205,11 +205,11 @@ export default function AIStudio() {
         <TabsList>
           <TabsTrigger value="models" className="flex items-center gap-2">
             <Cpu className="h-4 w-4" />
-            Модели ({filteredModels.length})
+            Агенты ({filteredModels.length})
           </TabsTrigger>
           <TabsTrigger value="solutions" className="flex items-center gap-2">
             <Brain className="h-4 w-4" />
-            Готовые решения ({filteredSolutions.length})
+            От Разработчиков ({filteredSolutions.length})
           </TabsTrigger>
         </TabsList>
 
