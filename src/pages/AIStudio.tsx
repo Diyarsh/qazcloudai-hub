@@ -165,7 +165,7 @@ export default function AIStudio() {
       <div className="space-y-4">
         <div>
           <h1 className="text-3xl font-bold text-foreground">AI-Студия</h1>
-          <p className="text-muted-foreground">Каталог моделей и готовых решений</p>
+          <p className="text-muted-foreground">Библиотека моделей и готовых решений</p>
         </div>
 
         {/* Search and Filters */}
