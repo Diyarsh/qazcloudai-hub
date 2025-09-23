@@ -87,39 +87,39 @@ export default function Chat() {
 
                   {/* Chat Input */}
                   <div className="w-full max-w-4xl">
-                    <div className="relative">
-                      <div className="absolute left-3 bottom-3 z-10">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-muted">
-                              <Paperclip className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="start" className="w-48">
-                            <DropdownMenuItem>
-                              📁 My Drive
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              📎 Upload File
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              📷 Take a photo
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                              🎬 Sample Media
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                      <div className="relative">
+                        <div className="absolute left-3 bottom-2 z-10">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-muted">
+                                <Paperclip className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="start" className="w-48">
+                              <DropdownMenuItem>
+                                📁 My Drive
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                📎 Upload File
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                📷 Take a photo
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                🎬 Sample Media
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+                        
+                        <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder={placeholders[currentPlaceholder]} className="min-h-[80px] max-h-[200px] resize-none pl-12 pr-12 transition-all duration-300" rows={2} disabled={isLoading} />
+                        
+                        <div className="absolute right-3 bottom-2">
+                          <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="h-8 w-8">
+                            <Send className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </div>
-                      
-                      <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder={placeholders[currentPlaceholder]} className="min-h-[50px] max-h-[150px] resize-none pl-12 pr-12 transition-all duration-300" rows={1} disabled={isLoading} />
-                      
-                      <div className="absolute right-3 bottom-3">
-                        <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="h-8 w-8">
-                          <Send className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
                   </div>
                 </div> : <div className="space-y-6">
                   {currentMessages.map(message => <div key={message.id} className={`flex gap-4 ${message.isUser ? "justify-end" : "justify-start"}`}>
@@ -170,7 +170,7 @@ export default function Chat() {
         {currentMessages.length > 0 && <div className="border-t bg-background">
             <div className="max-w-4xl mx-auto p-6">
               <div className="relative">
-                <div className="absolute left-3 bottom-3 z-10">
+                <div className="absolute left-3 bottom-2 z-10">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-muted">
@@ -194,9 +194,9 @@ export default function Chat() {
                   </DropdownMenu>
                 </div>
                 
-                <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder={placeholders[currentPlaceholder]} className="min-h-[50px] max-h-[150px] resize-none pl-12 pr-12 transition-all duration-300" rows={1} disabled={isLoading} />
+                <Textarea value={inputMessage} onChange={e => setInputMessage(e.target.value)} onKeyPress={handleKeyPress} placeholder={placeholders[currentPlaceholder]} className="min-h-[80px] max-h-[200px] resize-none pl-12 pr-12 transition-all duration-300" rows={2} disabled={isLoading} />
                 
-                <div className="absolute right-3 bottom-3">
+                <div className="absolute right-3 bottom-2">
                   <Button onClick={handleSendMessage} disabled={!inputMessage.trim() || isLoading} size="icon" className="h-8 w-8">
                     <Send className="h-4 w-4" />
                   </Button>
