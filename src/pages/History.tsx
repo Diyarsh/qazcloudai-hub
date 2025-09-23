@@ -10,11 +10,13 @@ import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useNavigate } from "react-router-dom";
 
 export default function History() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("all");
   const { chatSessions, setCurrentSessionId, deleteSession, createNewChat, addMessage } = useChatHistory();
+  const navigate = useNavigate();
 
   // Mock starred sessions for demo
   const [starredSessions, setStarredSessions] = useState<Set<string>>(new Set());
@@ -112,7 +114,7 @@ export default function History() {
 
   const handleSessionClick = (sessionId: string) => {
     setCurrentSessionId(sessionId);
-    window.location.href = '/dashboard';
+    navigate('/dashboard');
   };
 
   const filters = [

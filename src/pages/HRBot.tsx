@@ -255,18 +255,18 @@ export default function HRBot() {
                     className="bg-primary/10 text-primary font-medium"
                     onClick={() => handleFileUpload('document')}
                   >
-                    📎 Загрузить HR документ
-                    <Badge variant="secondary" className="ml-auto text-xs">PDF</Badge>
+                    📎 Загрузить файл
+                    <Badge variant="secondary" className="ml-auto text-xs">PDF, DOCX</Badge>
                   </DropdownMenuItem>
                   <DropdownMenuItem 
                     className="bg-primary/10 text-primary font-medium"
                     onClick={() => handleFileUpload('audio')}
                   >
-                    🎤 Загрузить аудио совещания
-                    <Badge variant="secondary" className="ml-auto text-xs">MP3</Badge>
+                    🎥 Видео
+                    <Badge variant="secondary" className="ml-auto text-xs">MP4, AVI</Badge>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    📋 Шаблоны документов
+                    🖼️ Изображение
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
