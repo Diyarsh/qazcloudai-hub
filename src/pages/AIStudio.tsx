@@ -25,124 +25,123 @@ export default function AIStudio() {
     {
       id: 1,
       name: "QazLLM-Ultra",
-      description: "Суверенная языковая модель для корпоративного сектора",
+      description: "Суверенная языковая модель для корпоративного сектора Казахстана",
       provider: "QazCloud AI-HUB",
       category: "llm",
       rating: 4.9,
       uses: 156000,
-      tags: ["Казахский", "Русский", "Английский"]
+      tags: ["Казахский", "Русский", "Английский", "Тенге"]
     },
     {
       id: 2,
-      name: "GPT-4 Turbo",
-      description: "Продвинутая языковая модель для генерации текста",
-      provider: "OpenAI",
-      category: "llm",
-      rating: 4.9,
-      uses: 2543000,
-      tags: ["Текст", "Код", "Анализ"]
+      name: "QazAssistant Pro",
+      description: "Корпоративный ассистент для казахстанских предприятий",
+      provider: "QazCloud AI-HUB",
+      category: "assistant",
+      rating: 4.8,
+      uses: 89000,
+      tags: ["HR", "Документооборот", "Планирование"]
     },
     {
       id: 3,
-      name: "Claude 3.5 Sonnet",
-      description: "Мощная модель для анализа и создания контента",
-      provider: "Anthropic",
-      category: "llm",
-      rating: 4.8,
-      uses: 1876000,
-      tags: ["Анализ", "Творчество", "Безопасность"]
-    },
-    {
-      id: 4,
-      name: "DocAnalyzer AI",
-      description: "ИИ-модель для анализа документов",
+      name: "KazDoc AI",
+      description: "Специализированный анализ казахстанской документации",
       provider: "QazCloud AI-HUB",
       category: "document",
       rating: 4.7,
       uses: 67800,
-      tags: ["PDF", "Извлечение", "OCR"]
+      tags: ["Госдокументы", "Правовые акты", "OCR"]
+    },
+    {
+      id: 4,
+      name: "KazCode Assistant",
+      description: "Помощник программиста для разработки в Казахстане",
+      provider: "QazCloud AI-HUB",
+      category: "code",
+      rating: 4.6,
+      uses: 45600,
+      tags: ["Python", "JavaScript", "Код-ревью"]
     },
     {
       id: 5,
-      name: "VisionNet Pro",
-      description: "Компьютерное зрение для промышленности",
+      name: "Industrial KZ",
+      description: "ИИ для промышленности Казахстана",
       provider: "QazCloud AI-HUB",
-      category: "vision",
-      rating: 4.6,
-      uses: 45600,
-      tags: ["Детекция", "Классификация", "Сегментация"]
+      category: "industrial",
+      rating: 4.8,
+      uses: 34500,
+      tags: ["Горнодобыча", "Нефтегаз", "Мониторинг"]
     },
     {
       id: 6,
-      name: "DataPredict ML",
-      description: "AutoML платформа для предсказательной аналитики",
-      provider: "QazCloud AI-HUB",
-      category: "automl",
-      rating: 4.5,
-      uses: 23400,
-      tags: ["Регрессия", "Классификация", "AutoML"]
+      name: "GPT-4 Turbo",
+      description: "Международная языковая модель",
+      provider: "OpenAI",
+      category: "llm",
+      rating: 4.9,
+      uses: 2543000,
+      tags: ["Многоязычность", "Анализ", "Генерация"]
     }
   ];
 
   const solutions = [
     {
       id: 1,
-      name: "FAQ-бот по документам",
-      description: "Автоматические ответы на вопросы по корпоративной документации",
-      category: "bot",
+      name: "Электронное правительство чат-бот",
+      description: "Автоматические ответы на вопросы граждан по государственным услугам",
+      category: "assistant",
       icon: Bot,
-      tags: ["RAG", "NLP", "Поиск"]
+      tags: ["ЭГов", "Граждане", "24/7"]
     },
     {
       id: 2,
-      name: "Анализ нарушений на производстве",
-      description: "Мониторинг и анализ нарушений техники безопасности",
-      category: "analytics",
-      icon: BarChart3,
-      tags: ["Безопасность", "Мониторинг", "Алерты"]
+      name: "Анализ контрактов ГЗК",
+      description: "Обработка документов государственных закупок",
+      category: "document",
+      icon: FileText,
+      tags: ["Контракты", "ГЗК", "Комплаенс"]
     },
     {
       id: 3,
-      name: "Бот отчетов по командировкам",
-      description: "Автоматизация создания и обработки командировочных отчетов",
-      category: "automation",
-      icon: FileText,
-      tags: ["Автоматизация", "Отчеты", "HR"]
+      name: "HR-бот для Самрук-Казына",
+      description: "Автоматизация HR-процессов в госкорпорациях",
+      category: "assistant",
+      icon: Bot,
+      tags: ["HR", "Корпоративный", "Автоматизация"]
     },
     {
       id: 4,
-      name: "Анализ текстов и документов",
-      description: "Интеллектуальная обработка и анализ документооборота",
-      category: "document",
-      icon: FileText,
-      tags: ["NLP", "Классификация", "Извлечение"]
+      name: "Мониторинг месторождений",
+      description: "ИИ-система контроля промышленных объектов",
+      category: "industrial",
+      icon: BarChart3,
+      tags: ["Горнодобыча", "IoT", "Безопасность"]
     },
     {
       id: 5,
-      name: "Система рекомендаций",
-      description: "Персонализированные рекомендации для клиентов",
-      category: "ml",
+      name: "Код-ревьювер QazDev",
+      description: "Автоматическая проверка кода по казахстанским стандартам",
+      category: "code",
       icon: Zap,
-      tags: ["ML", "Персонализация", "Рекомендации"]
+      tags: ["Код-ревью", "ГОСТ", "Качество"]
     },
     {
       id: 6,
-      name: "Прогнозирование спроса",
-      description: "Предсказание спроса на товары и услуги",
-      category: "analytics",
-      icon: BarChart3,
-      tags: ["Прогнозы", "Временные ряды", "Бизнес"]
+      name: "Налоговый ассистент",
+      description: "Помощник по налоговому законодательству РК",
+      category: "document",
+      icon: FileText,
+      tags: ["Налоги", "Законодательство", "КНК"]
     }
   ];
 
   const categories = [
     { id: "all", name: "Все", count: models.length + solutions.length },
     { id: "llm", name: "Языковые модели", count: models.filter(m => m.category === "llm").length },
-    { id: "vision", name: "Компьютерное зрение", count: models.filter(m => m.category === "vision").length },
-    { id: "document", name: "Обработка документов", count: models.filter(m => m.category === "document").length + solutions.filter(s => s.category === "document").length },
-    { id: "automl", name: "AutoML", count: models.filter(m => m.category === "automl").length },
-    { id: "bot", name: "Боты", count: solutions.filter(s => s.category === "bot").length },
-    { id: "analytics", name: "Аналитика", count: solutions.filter(s => s.category === "analytics").length }
+    { id: "assistant", name: "Корпоративный ассистент", count: models.filter(m => m.category === "assistant").length + solutions.filter(s => s.category === "assistant").length },
+    { id: "document", name: "Документы", count: models.filter(m => m.category === "document").length + solutions.filter(s => s.category === "document").length },
+    { id: "code", name: "Код", count: models.filter(m => m.category === "code").length + solutions.filter(s => s.category === "code").length },
+    { id: "industrial", name: "Промышленные", count: models.filter(m => m.category === "industrial").length + solutions.filter(s => s.category === "industrial").length }
   ];
 
   const filteredModels = models.filter(model => {
