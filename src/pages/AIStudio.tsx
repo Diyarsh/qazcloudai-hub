@@ -29,7 +29,6 @@ export default function AIStudio() {
       description: "Суверенная языковая модель для корпоративного сектора Казахстана",
       provider: "QazCloud AI-HUB",
       category: "llm",
-      rating: 4.9,
       uses: 156000,
       tags: ["Казахский", "Русский", "Английский", "Тенге"]
     },
@@ -39,7 +38,6 @@ export default function AIStudio() {
       description: "Корпоративный ассистент для казахстанских предприятий",
       provider: "QazCloud AI-HUB",
       category: "assistant",
-      rating: 4.8,
       uses: 89000,
       tags: ["HR", "Документооборот", "Планирование"]
     },
@@ -49,7 +47,6 @@ export default function AIStudio() {
       description: "Специализированный анализ казахстанской документации",
       provider: "QazCloud AI-HUB",
       category: "document",
-      rating: 4.7,
       uses: 67800,
       tags: ["Госдокументы", "Правовые акты", "OCR"]
     },
@@ -59,7 +56,6 @@ export default function AIStudio() {
       description: "Помощник программиста для разработки в Казахстане",
       provider: "QazCloud AI-HUB",
       category: "code",
-      rating: 4.6,
       uses: 45600,
       tags: ["Python", "JavaScript", "Код-ревью"]
     },
@@ -69,7 +65,6 @@ export default function AIStudio() {
       description: "ИИ для промышленности Казахстана",
       provider: "QazCloud AI-HUB",
       category: "industrial",
-      rating: 4.8,
       uses: 34500,
       tags: ["Горнодобыча", "Нефтегаз", "Мониторинг"]
     },
@@ -79,7 +74,6 @@ export default function AIStudio() {
       description: "Международная языковая модель",
       provider: "OpenAI",
       category: "llm",
-      rating: 4.9,
       uses: 2543000,
       tags: ["Многоязычность", "Анализ", "Генерация"]
     }
@@ -94,7 +88,6 @@ export default function AIStudio() {
       company: "QazTech Solutions",
       icon: Bot,
       users: "45К",
-      rating: 4.8,
       tags: ["ЭГов", "Граждане", "24/7"]
     },
     {
@@ -105,7 +98,6 @@ export default function AIStudio() {
       company: "KazLegal AI",
       icon: FileText,
       users: "12К",
-      rating: 4.9,
       tags: ["Контракты", "ГЗК", "Комплаенс"]
     },
     {
@@ -116,7 +108,6 @@ export default function AIStudio() {
       company: "Samruk-Kazyna Digital",
       icon: Bot,
       users: "8К",
-      rating: 4.7,
       tags: ["HR", "Корпоративный", "Автоматизация"]
     },
     {
@@ -127,7 +118,6 @@ export default function AIStudio() {
       company: "KazMining Tech",
       icon: BarChart3,
       users: "3К",
-      rating: 4.6,
       tags: ["Горнодобыча", "IoT", "Безопасность"]
     },
     {
@@ -138,7 +128,6 @@ export default function AIStudio() {
       company: "QazDev Studio",
       icon: Zap,
       users: "15К",
-      rating: 4.8,
       tags: ["Код-ревью", "ГОСТ", "Качество"]
     },
     {
@@ -149,7 +138,6 @@ export default function AIStudio() {
       company: "TaxBot KZ",
       icon: FileText,
       users: "25К", 
-      rating: 4.9,
       tags: ["Налоги", "Законодательство", "КНК"]
     }
   ];
@@ -236,15 +224,9 @@ export default function AIStudio() {
             {filteredModels.map((model) => (
               <Card key={model.id} className="hover:shadow-md transition-shadow">
                 <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <QazCloudLogo className="h-5 w-5" />
-                      <CardTitle className="text-lg">{model.name}</CardTitle>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm font-medium">{model.rating}</span>
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <QazCloudLogo className="h-5 w-5" />
+                    <CardTitle className="text-lg">{model.name}</CardTitle>
                   </div>
                   <CardDescription className="text-sm">
                     {model.description}
@@ -298,10 +280,6 @@ export default function AIStudio() {
                       <span className="flex items-center gap-1">
                         <User className="h-4 w-4" />
                         {solution.users}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Star className="h-4 w-4 text-yellow-500" />
-                        {solution.rating}
                       </span>
                     </div>
                     <Button 
