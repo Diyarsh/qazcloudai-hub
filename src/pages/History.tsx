@@ -3,10 +3,14 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { useNavigate } from "react-router-dom";
-
 export default function History() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { chatSessions, setCurrentSessionId, createNewChat, addMessage } = useChatHistory();
+  const {
+    chatSessions,
+    setCurrentSessionId,
+    createNewChat,
+    addMessage
+  } = useChatHistory();
   const navigate = useNavigate();
 
   // Add example conversations if empty
@@ -34,27 +38,17 @@ export default function History() {
       addMessage(codeSessionId, "🔍 Анализ кода завершен:\n\n✅ Положительные моменты:\n• Хорошая структура компонента\n• Правильное использование hooks\n\n⚠️ Рекомендации:\n• Добавить error boundaries\n• Оптимизировать re-renders\n• Улучшить типизацию", false);
     }
   }, []);
-
   const filteredSessions = useMemo(() => {
     const sessions = Object.values(chatSessions);
-    
-    return sessions
-      .filter((session) => {
-        const matchesSearch = session.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                             session.messages.some(msg => 
-                               msg.content.toLowerCase().includes(searchQuery.toLowerCase())
-                             );
-        
-        return matchesSearch;
-      })
-      .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+    return sessions.filter(session => {
+      const matchesSearch = session.title.toLowerCase().includes(searchQuery.toLowerCase()) || session.messages.some(msg => msg.content.toLowerCase().includes(searchQuery.toLowerCase()));
+      return matchesSearch;
+    }).sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
   }, [chatSessions, searchQuery]);
-
   const getRelativeTime = (date: Date) => {
     const now = new Date();
     const diffInHours = (now.getTime() - date.getTime()) / (1000 * 60 * 60);
     const diffInDays = diffInHours / 24;
-    
     if (diffInHours < 1) {
       return "just now";
     } else if (diffInHours < 24) {
@@ -64,54 +58,38 @@ export default function History() {
     } else if (diffInDays < 30) {
       return `${Math.floor(diffInDays / 7)} weeks ago`;
     } else {
-      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric'
+      });
     }
   };
-
   const handleSessionClick = (sessionId: string) => {
     setCurrentSessionId(sessionId);
     navigate('/dashboard');
   };
-
-  return (
-    <div className="max-w-4xl mx-auto p-6">
+  return <div className="max-w-4xl mx-auto p-6">
       {/* Header */}
-      <h1 className="text-2xl font-semibold text-center mb-8">History</h1>
+      <h1 className="text-2xl font-semibold text-center mb-8">История</h1>
       
       {/* Search */}
       <div className="relative mb-8">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input
-          placeholder="Search"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="pl-10 bg-transparent border-muted/30"
-        />
+        <Input placeholder="Search" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-10 bg-transparent border-muted/30" />
       </div>
 
       {/* Chat Sessions List */}
       <div className="space-y-0">
-        {filteredSessions.length === 0 ? (
-          <div className="text-center py-12 text-muted-foreground">
+        {filteredSessions.length === 0 ? <div className="text-center py-12 text-muted-foreground">
             {searchQuery ? "No conversations found" : "No conversations yet"}
-          </div>
-        ) : (
-          filteredSessions.map((session) => (
-            <div
-              key={session.id}
-              className="flex items-center justify-between py-4 px-0 hover:bg-muted/20 cursor-pointer transition-colors"
-              onClick={() => handleSessionClick(session.id)}
-            >
+          </div> : filteredSessions.map(session => <div key={session.id} className="flex items-center justify-between py-4 px-0 hover:bg-muted/20 cursor-pointer transition-colors" onClick={() => handleSessionClick(session.id)}>
               <div className="flex-1 min-w-0">
                 <p className="text-foreground truncate">{session.title}</p>
               </div>
               <div className="text-sm text-muted-foreground ml-4 whitespace-nowrap">
                 {getRelativeTime(session.updatedAt)}
               </div>
-            </div>
-          ))
-        )}
+            </div>)}
       </div>
-    </div>
-  );
+    </div>;
 }
