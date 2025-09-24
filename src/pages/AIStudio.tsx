@@ -243,15 +243,15 @@ export default function AIStudio() {
                         <p className="text-xs text-muted-foreground truncate">{solution.company}</p>
                       </div>
                     </div>
-                    <Badge variant="outline" className="text-xs shrink-0 ml-2">{solution.category}</Badge>
+                    
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0 space-y-3">
                   <p className="text-xs text-muted-foreground line-clamp-2">{solution.description}</p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <User className="h-3 w-3" />
-                      <span>{solution.users}</span>
+                      
+                      
                     </div>
                     <Button size="sm" className="h-7 text-xs px-3" onClick={() => {
                   if (solution.name === "HR-бот для Самрук-Казына") {
