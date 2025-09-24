@@ -201,28 +201,25 @@ export default function AIStudio() {
         </TabsList>
 
         <TabsContent value="models">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredModels.map(model => <Card key={model.id} className="hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <div className="flex items-center gap-2">
-                    <QazCloudLogo className="h-5 w-5" />
-                    <CardTitle className="text-lg">{model.name}</CardTitle>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {filteredModels.map(model => <Card key={model.id} className="hover:shadow-lg hover:border-primary/20 transition-all duration-200 group">
+                <CardHeader className="pb-3">
+                  <div className="flex items-center gap-2 mb-1">
+                    <QazCloudLogo className="h-4 w-4 text-primary" />
+                    <CardTitle className="text-base font-semibold group-hover:text-primary transition-colors">{model.name}</CardTitle>
                   </div>
-                  <CardDescription className="text-sm">
+                  <CardDescription className="text-xs line-clamp-2">
                     {model.description}
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="pt-0 space-y-3">
                   <div className="flex flex-wrap gap-1">
-                    {model.tags.map((tag, index) => <Badge key={index} variant="secondary" className="text-xs">
+                    {model.tags.slice(0, 3).map((tag, index) => <Badge key={index} variant="secondary" className="text-xs px-2 py-0.5 bg-primary/10 text-primary border-primary/20">
                         {tag}
                       </Badge>)}
+                    {model.tags.length > 3 && <Badge variant="outline" className="text-xs px-2 py-0.5">+{model.tags.length - 3}</Badge>}
                   </div>
-                  <div className="flex items-center justify-between text-sm text-muted-foreground">
-                    
-                    
-                  </div>
-                  <Button className="w-full">
+                  <Button className="w-full h-8 text-sm" size="sm">
                     Использовать
                   </Button>
                 </CardContent>
@@ -231,31 +228,32 @@ export default function AIStudio() {
         </TabsContent>
 
         <TabsContent value="solutions">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredSolutions.map(solution => <Card key={solution.id} className="hover:shadow-lg transition-all cursor-pointer group">
-                <CardHeader>
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-gradient-to-r from-primary to-primary/80">
-                        <solution.icon className="h-6 w-6 text-white" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {filteredSolutions.map(solution => <Card key={solution.id} className="hover:shadow-lg hover:border-primary/20 transition-all duration-200 cursor-pointer group">
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="p-1.5 rounded-md bg-gradient-to-r from-primary to-primary/80">
+                        <solution.icon className="h-4 w-4 text-white" />
                       </div>
-                      <div>
-                        <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                      <div className="min-w-0 flex-1">
+                        <CardTitle className="text-sm font-semibold group-hover:text-primary transition-colors line-clamp-1">
                           {solution.name}
                         </CardTitle>
-                        <p className="text-sm text-muted-foreground">{solution.company}</p>
+                        <p className="text-xs text-muted-foreground truncate">{solution.company}</p>
                       </div>
                     </div>
-                    <Badge variant="outline">{solution.category}</Badge>
+                    <Badge variant="outline" className="text-xs shrink-0 ml-2">{solution.category}</Badge>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground mb-4">{solution.description}</p>
+                <CardContent className="pt-0 space-y-3">
+                  <p className="text-xs text-muted-foreground line-clamp-2">{solution.description}</p>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                      <User className="h-3 w-3" />
+                      <span>{solution.users}</span>
                     </div>
-                    <Button size="sm" onClick={() => {
+                    <Button size="sm" className="h-7 text-xs px-3" onClick={() => {
                   if (solution.name === "HR-бот для Самрук-Казына") {
                     navigate("/hr-bot");
                   }
