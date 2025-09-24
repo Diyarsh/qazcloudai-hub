@@ -185,9 +185,9 @@ export default function Chat() {
                       className="cursor-pointer hover:bg-muted/50 transition-colors border-muted/50"
                       onClick={() => navigate('/ai-studio?category=document')}
                     >
-                      <CardContent className="flex items-center gap-3 p-4">
-                        <div className="p-2 bg-primary/10 rounded-lg">
-                          <FileText className="h-5 w-5 text-primary" />
+                      <CardContent className="flex items-center gap-2 p-3">
+                        <div className="p-1.5 bg-primary/10 rounded-md">
+                          <FileText className="h-4 w-4 text-primary" />
                         </div>
                         <div>
                           <h3 className="font-medium text-sm">Обработка документов</h3>
@@ -200,9 +200,9 @@ export default function Chat() {
                       className="cursor-pointer hover:bg-muted/50 transition-colors border-muted/50"
                       onClick={() => navigate('/ai-studio?category=bot')}
                     >
-                      <CardContent className="flex items-center gap-3 p-4">
-                        <div className="p-2 bg-primary/10 rounded-lg">
-                          <Bot className="h-5 w-5 text-primary" />
+                      <CardContent className="flex items-center gap-2 p-3">
+                        <div className="p-1.5 bg-primary/10 rounded-md">
+                          <Bot className="h-4 w-4 text-primary" />
                         </div>
                         <div>
                           <h3 className="font-medium text-sm">Боты</h3>
@@ -215,9 +215,9 @@ export default function Chat() {
                       className="cursor-pointer hover:bg-muted/50 transition-colors border-muted/50"
                       onClick={() => navigate('/ai-studio?category=all')}
                     >
-                      <CardContent className="flex items-center gap-3 p-4">
-                        <div className="p-2 bg-primary/10 rounded-lg">
-                          <Settings className="h-5 w-5 text-primary" />
+                      <CardContent className="flex items-center gap-2 p-3">
+                        <div className="p-1.5 bg-primary/10 rounded-md">
+                          <Settings className="h-4 w-4 text-primary" />
                         </div>
                         <div>
                           <h3 className="font-medium text-sm">От Разработчиков</h3>
