@@ -16,8 +16,7 @@ export default function History() {
   // Add example conversations if empty
   useEffect(() => {
     const sessions = Object.values(chatSessions);
-    // Always create fresh examples (comment out the condition below to force refresh)
-    // if (sessions.length === 0) {
+    if (sessions.length === 0) {
       // Create example HR bot conversation
       const hrSessionId = createNewChat("Как оформить отпуск?");
       addMessage(hrSessionId, "Как оформить отпуск в Самрук-Казына?", true);
@@ -52,8 +51,8 @@ export default function History() {
       const meetingSessionId = createNewChat("Совещание по стратегии");
       addMessage(meetingSessionId, "🎤 Запись совещания: strategy_meeting.mp3", true);
       addMessage(meetingSessionId, "🎯 Транскрипция готова!\n\n📝 Основные решения:\n• Запуск в Шымкенте в Q1 2025\n• Бюджет на маркетинг: +30%\n• Новая CRM к марту\n• Прием 15 сотрудников", false);
-    // }
-  }, []);
+    }
+  }, [chatSessions, createNewChat, addMessage]);
   const filteredSessions = useMemo(() => {
     const sessions = Object.values(chatSessions);
     return sessions.filter(session => {
