@@ -132,11 +132,11 @@ export default function History() {
   };
   const handleSessionClick = (sessionId: string) => {
     setCurrentSessionId(sessionId);
-    navigate('/chat');
+    navigate('/dashboard');
   };
 
   const handleOpenInNewTab = (sessionId: string) => {
-    const url = `/chat?session=${sessionId}`;
+    const url = `/dashboard?session=${sessionId}`;
     window.open(url, '_blank');
   };
 
