@@ -12,6 +12,7 @@ import HRBot from "./pages/HRBot";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AIStudio from "./pages/AIStudio";
 import Projects from "./pages/Projects";
+import ProjectDetail from "./pages/ProjectDetail";
 import NewProject from "./pages/NewProject";
 import History from "./pages/History";
 import Laboratory from "./pages/Laboratory";
@@ -51,6 +52,11 @@ const App = () => (
                   <AppLayout>
                     <Projects />
                   </AppLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/projects/:id" element={
+                <ProtectedRoute>
+                  <ProjectDetail />
                 </ProtectedRoute>
               } />
               <Route path="/projects/new" element={
