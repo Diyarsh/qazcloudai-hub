@@ -61,6 +61,19 @@ export const useChatHistory = () => {
     }
   }, [currentSessionId]);
 
+  const updateSessionTitle = useCallback((sessionId: string, newTitle: string) => {
+    setChatSessions(prev => prev.map(session => {
+      if (session.id === sessionId) {
+        return {
+          ...session,
+          title: newTitle,
+          updatedAt: new Date(),
+        };
+      }
+      return session;
+    }));
+  }, []);
+
   // Convert array to object for compatibility
   const sessionObject = chatSessions.reduce((acc, session) => {
     acc[session.id] = session;
@@ -76,6 +89,7 @@ export const useChatHistory = () => {
     selectChat,
     setCurrentSessionId,
     deleteSession,
+    updateSessionTitle,
   };
 };
 

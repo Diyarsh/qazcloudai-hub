@@ -1,15 +1,41 @@
 import { useState, useMemo, useEffect } from "react";
 import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+import { Search, ExternalLink, Edit2, Trash2, MoreHorizontal } from "lucide-react";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { useNavigate } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 export default function History() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [sessionToDelete, setSessionToDelete] = useState<string | null>(null);
+  const [renameDialogOpen, setRenameDialogOpen] = useState(false);
+  const [sessionToRename, setSessionToRename] = useState<string | null>(null);
+  const [newTitle, setNewTitle] = useState("");
+  
   const {
     chatSessions,
     setCurrentSessionId,
     createNewChat,
-    addMessage
+    addMessage,
+    deleteSession,
+    updateSessionTitle
   } = useChatHistory();
   const navigate = useNavigate();
 
@@ -51,6 +77,31 @@ export default function History() {
       const meetingSessionId = createNewChat("Совещание по стратегии");
       addMessage(meetingSessionId, "🎤 Запись совещания: strategy_meeting.mp3", true);
       addMessage(meetingSessionId, "🎯 Транскрипция готова!\n\n📝 Основные решения:\n• Запуск в Шымкенте в Q1 2025\n• Бюджет на маркетинг: +30%\n• Новая CRM к марту\n• Прием 15 сотрудников", false);
+
+      // Create additional examples for bigger list
+      const codeSessionId = createNewChat("Ревью кода Python");
+      addMessage(codeSessionId, "👨‍💻 Проверь этот код на оптимизацию", true);
+      addMessage(codeSessionId, "🔧 Анализ кода завершен:\n\n⚡ Найдены возможности для оптимизации:\n• Используй list comprehension\n• Замени циклы на pandas.apply()\n• Добавь кэширование результатов\n\n📈 Ожидаемое ускорение: 3-5x", false);
+
+      const emailSessionId = createNewChat("Составление email рассылки");
+      addMessage(emailSessionId, "✉️ Нужна рассылка для клиентов об акции", true);
+      addMessage(emailSessionId, "📧 Готово! Создана рассылка:\n\n📋 Структура:\n• Яркий заголовок\n• Персонализация по имени\n• 20% скидка до конца месяца\n• Call-to-action кнопка\n• Отписка внизу", false);
+
+      const budgetSessionId = createNewChat("Планирование бюджета IT");
+      addMessage(budgetSessionId, "💰 Нужен бюджет на IT инфраструктуру", true);
+      addMessage(budgetSessionId, "📊 Бюджет составлен:\n\n💻 Основные статьи:\n• Серверы и оборудование: 50M тенге\n• Лицензии ПО: 15M тенге\n• Безопасность: 10M тенге\n• Резерв на развитие: 25M тенге\n\n📈 Итого: 100M тенге", false);
+
+      const securitySessionId = createNewChat("Аудит информационной безопасности");
+      addMessage(securitySessionId, "🛡️ Проведи аудит безопасности сети", true);
+      addMessage(securitySessionId, "🔒 Аудит завершен!\n\n⚠️ Найдены уязвимости:\n• Слабые пароли (15 учетных записей)\n• Устаревшие SSL сертификаты\n• Отсутствие 2FA для админов\n\n✅ План устранения готов", false);
+
+      const marketingSessionId = createNewChat("Стратегия digital маркетинга");
+      addMessage(marketingSessionId, "📱 Создай стратегию для соцсетей", true);
+      addMessage(marketingSessionId, "🎯 Стратегия готова:\n\n📊 Каналы:\n• Instagram: визуальный контент\n• LinkedIn: B2B контент\n• YouTube: обучающие видео\n• Telegram: новости компании\n\n📈 ROI прогноз: 250%", false);
+
+      const automationSessionId = createNewChat("Автоматизация HR процессов");
+      addMessage(automationSessionId, "🤖 Как автоматизировать подбор кадров?", true);
+      addMessage(automationSessionId, "⚙️ План автоматизации:\n\n🔧 Инструменты:\n• ATS система для резюме\n• Чат-бот для первичного скрининга\n• Видео-интервью платформа\n• Интеграция с корпоративными системами\n\n⏱️ Экономия времени: 60%", false);
     }
   }, [chatSessions, createNewChat, addMessage]);
   const filteredSessions = useMemo(() => {
@@ -83,6 +134,41 @@ export default function History() {
     setCurrentSessionId(sessionId);
     navigate('/chat');
   };
+
+  const handleOpenInNewTab = (sessionId: string) => {
+    const url = `/chat?session=${sessionId}`;
+    window.open(url, '_blank');
+  };
+
+  const handleRename = (sessionId: string, currentTitle: string) => {
+    setSessionToRename(sessionId);
+    setNewTitle(currentTitle);
+    setRenameDialogOpen(true);
+  };
+
+  const handleDelete = (sessionId: string) => {
+    setSessionToDelete(sessionId);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmRename = () => {
+    if (sessionToRename && newTitle.trim()) {
+      updateSessionTitle(sessionToRename, newTitle.trim());
+      toast.success("Чат переименован");
+    }
+    setRenameDialogOpen(false);
+    setSessionToRename(null);
+    setNewTitle("");
+  };
+
+  const confirmDelete = () => {
+    if (sessionToDelete) {
+      deleteSession(sessionToDelete);
+      toast.success("Чат удален");
+    }
+    setDeleteDialogOpen(false);
+    setSessionToDelete(null);
+  };
   return <div className="max-w-4xl mx-auto p-6">
       {/* Header */}
       <h1 className="text-2xl font-semibold text-center mb-8">История</h1>
@@ -95,16 +181,121 @@ export default function History() {
 
       {/* Chat Sessions List */}
       <div className="space-y-0">
-        {filteredSessions.length === 0 ? <div className="text-center py-12 text-muted-foreground">
+        {filteredSessions.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
             {searchQuery ? "No conversations found" : "No conversations yet"}
-          </div> : filteredSessions.map(session => <div key={session.id} className="flex items-center justify-between py-4 px-0 hover:bg-muted/20 cursor-pointer transition-colors" onClick={() => handleSessionClick(session.id)}>
-              <div className="flex-1 min-w-0">
+          </div>
+        ) : (
+          filteredSessions.map(session => (
+            <div 
+              key={session.id} 
+              className="group flex items-center justify-between py-4 px-4 hover:bg-muted/20 cursor-pointer transition-colors rounded-lg"
+            >
+              <div 
+                className="flex-1 min-w-0"
+                onClick={() => handleSessionClick(session.id)}
+              >
                 <p className="text-foreground truncate">{session.title}</p>
               </div>
-              <div className="text-sm text-muted-foreground ml-4 whitespace-nowrap">
-                {getRelativeTime(session.updatedAt)}
+              
+              <div className="flex items-center gap-2">
+                <div className="text-sm text-muted-foreground ml-4 whitespace-nowrap">
+                  {getRelativeTime(session.updatedAt)}
+                </div>
+                
+                {/* Action buttons - shown on hover */}
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-8 w-8 p-0"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpenInNewTab(session.id);
+                        }}
+                      >
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        Открыть в новой вкладке
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRename(session.id, session.title);
+                        }}
+                      >
+                        <Edit2 className="h-4 w-4 mr-2" />
+                        Переименовать
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(session.id);
+                        }}
+                        className="text-destructive"
+                      >
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Удалить
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               </div>
-            </div>)}
+            </div>
+          ))
+        )}
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Удалить чат?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Это действие нельзя отменить. Чат будет удален навсегда.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Отмена</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDelete}>Удалить</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Rename Dialog */}
+      <AlertDialog open={renameDialogOpen} onOpenChange={setRenameDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Переименовать чат</AlertDialogTitle>
+            <AlertDialogDescription>
+              Введите новое название для чата.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="py-4">
+            <Input
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              placeholder="Новое название чата"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  confirmRename();
+                }
+              }}
+            />
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Отмена</AlertDialogCancel>
+            <AlertDialogAction onClick={confirmRename}>Сохранить</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>;
 }
