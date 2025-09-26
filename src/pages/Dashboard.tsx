@@ -3,7 +3,7 @@ import { QazCloudLogo } from "@/components/ui/qazcloud-logo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChatInterface } from "@/components/chat/ChatInterface";
+import { ChatMain } from "@/components/chat/ChatMain";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { 
   Users, 
@@ -99,10 +99,12 @@ export default function Dashboard() {
         {/* Chat Interface - Make it bigger */}
         <div className="lg:col-span-2">
           <div className="h-[calc(100vh-300px)] min-h-[600px]">
-            <ChatInterface 
+            <ChatMain 
+              userName="Роман"
               messages={getCurrentSession()?.messages || []}
               onSendMessage={handleSendMessage}
-              isLoading={isLoading}
+              onViewCatalog={() => window.location.href = '/models'}
+              currentSessionId={currentSessionId}
             />
           </div>
         </div>
