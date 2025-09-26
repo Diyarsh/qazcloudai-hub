@@ -42,7 +42,7 @@ export default function History() {
   // Add example conversations if empty
   useEffect(() => {
     const sessions = Object.values(chatSessions);
-    if (sessions.length === 0) {
+    if (sessions.length < 13) {
       // Create example HR bot conversation
       const hrSessionId = createNewChat("Как оформить отпуск?");
       addMessage(hrSessionId, "Как оформить отпуск в Самрук-Казына?", true);

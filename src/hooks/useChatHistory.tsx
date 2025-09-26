@@ -1,9 +1,36 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ChatSession, ChatMessage } from "@/types/chat";
 
 export const useChatHistory = () => {
-  const [chatSessions, setChatSessions] = useState<ChatSession[]>([]);
-  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+  const [chatSessions, setChatSessions] = useState<ChatSession[]>(() => {
+    try {
+      const raw = localStorage.getItem("chatSessions");
+      if (!raw) return [];
+      const data = JSON.parse(raw) as ChatSession[];
+      return data.map((s) => ({
+        ...s,
+        createdAt: new Date(s.createdAt),
+        updatedAt: new Date(s.updatedAt),
+        messages: s.messages.map((m) => ({ ...m, timestamp: new Date(m.timestamp) })),
+      }));
+    } catch {
+      return [];
+    }
+  });
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(() => {
+    return localStorage.getItem("currentSessionId");
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("chatSessions", JSON.stringify(chatSessions));
+    } catch {}
+  }, [chatSessions]);
+
+  useEffect(() => {
+    if (currentSessionId) localStorage.setItem("currentSessionId", currentSessionId);
+    else localStorage.removeItem("currentSessionId");
+  }, [currentSessionId]);
 
   const createNewChat = useCallback((firstMessage?: string) => {
     const newSession: ChatSession = {
