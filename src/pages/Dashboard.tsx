@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { QazCloudLogo } from "@/components/ui/qazcloud-logo";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,17 +19,29 @@ import {
   ArrowRight,
   MessageSquare
 } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const { 
     chatSessions, 
     currentSessionId, 
-    getCurrentSession, 
+    // getCurrentSession, 
     createNewChat, 
-    addMessage 
+    addMessage,
+    setCurrentSessionId
   } = useChatHistory();
 
+  const [searchParams] = useSearchParams();
+  const sessionParam = searchParams.get('session');
+
+  useEffect(() => {
+    if (sessionParam) {
+      setCurrentSessionId(sessionParam);
+    } else {
+      setCurrentSessionId(null);
+    }
+  }, [sessionParam, setCurrentSessionId]);
   const handleSendMessage = async (message: string) => {
     let sessionId = currentSessionId;
     
@@ -78,6 +90,7 @@ export default function Dashboard() {
     }
   ];
 
+  const messagesToShow = sessionParam ? (chatSessions[sessionParam]?.messages || []) : [];
 
   return (
     <div className="p-6 space-y-6">
@@ -101,7 +114,7 @@ export default function Dashboard() {
           <div className="h-[calc(100vh-300px)] min-h-[600px]">
             <ChatMain 
               userName="Роман"
-              messages={getCurrentSession()?.messages || []}
+              messages={messagesToShow}
               onSendMessage={handleSendMessage}
               onViewCatalog={() => window.location.href = '/models'}
               currentSessionId={currentSessionId}

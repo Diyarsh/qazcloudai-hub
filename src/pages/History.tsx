@@ -132,7 +132,7 @@ export default function History() {
   };
   const handleSessionClick = (sessionId: string) => {
     setCurrentSessionId(sessionId);
-    navigate('/dashboard');
+    navigate(`/dashboard?session=${sessionId}`);
   };
 
   const handleOpenInNewTab = (sessionId: string) => {
