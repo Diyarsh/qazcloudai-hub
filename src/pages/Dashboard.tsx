@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ChatMain } from "@/components/chat/ChatMain";
 import { useChatHistory } from "@/hooks/useChatHistory";
+import { useTranslation } from 'react-i18next';
 import { 
   Users, 
   Activity, 
@@ -22,6 +23,7 @@ import {
 import { useSearchParams } from "react-router-dom";
 
 export default function Dashboard() {
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
   const { 
     chatSessions, 
@@ -74,19 +76,19 @@ export default function Dashboard() {
 
   const recentProjects = [
     {
-      name: "Клиенттердің деректерін талдау",
-      status: "Орындалуда",
-      type: "Классификация"
+      name: t('dashboard.sampleProjects.customerAnalysis'),
+      status: t('dashboard.projectStatus.inProgress'),
+      type: t('dashboard.projectTypes.classification')
     },
     {
-      name: "Ұсыныстар жүйесі",
-      status: "Аяқталды", 
-      type: "ML Pipeline"
+      name: t('dashboard.sampleProjects.recommendationSystem'),
+      status: t('dashboard.projectStatus.completed'), 
+      type: t('dashboard.projectTypes.mlPipeline')
     },
     {
-      name: "Құжаттарды өңдеу",
-      status: "Жоспарлау",
-      type: "NLP"
+      name: t('dashboard.sampleProjects.documentProcessing'),
+      status: t('dashboard.projectStatus.planning'),
+      type: t('dashboard.projectTypes.nlp')
     }
   ];
 
@@ -97,12 +99,12 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Панель управления</h1>
-          <p className="text-muted-foreground">Обзор активности AI-платформы</p>
+          <h1 className="text-3xl font-bold text-foreground">{t('dashboard.title')}</h1>
+          <p className="text-muted-foreground">{t('dashboard.subtitle')}</p>
         </div>
         <Button>
           <Zap className="h-4 w-4 mr-2" />
-          Создать проект
+          {t('dashboard.createProject')}
         </Button>
       </div>
 
@@ -132,14 +134,14 @@ export default function Dashboard() {
                 <div>
                   <CardTitle className="flex items-center gap-2">
                     <QazCloudLogo className="h-5 w-5" />
-                    Популярные модели
+                    {t('dashboard.popularModels')}
                   </CardTitle>
                   <CardDescription>
-                    Рекомендуемые ИИ-модели для ваших задач
+                    {t('dashboard.popularModelsDesc')}
                   </CardDescription>
                 </div>
                 <Button variant="outline" onClick={() => window.location.href = '/models'}>
-                  Смотреть все
+                  {t('dashboard.viewAll')}
                   <ArrowRight className="h-4 w-4 ml-2" />
                 </Button>
               </div>
@@ -148,35 +150,39 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
                   {
-                    name: "QazLLM-Ultra",
-                    description: "Суверенная языковая модель для корпоративного сектора",
-                    provider: "QazCloud AI-HUB",
-                    category: "Текст",
+                    key: 'qazllm',
+                    name: t('dashboard.models.qazllm.name'),
+                    description: t('dashboard.models.qazllm.description'),
+                    provider: t('dashboard.models.qazllm.provider'),
+                    category: t('dashboard.models.qazllm.category'),
                     rating: 4.9,
                     uses: 156000,
                     functional: true
                   },
                   {
-                    name: "GPT-4 Turbo",
-                    description: "Продвинутая языковая модель для генерации текста",
-                    provider: "OpenAI",
-                    category: "Текст",
+                    key: 'gpt4',
+                    name: t('dashboard.models.gpt4.name'),
+                    description: t('dashboard.models.gpt4.description'),
+                    provider: t('dashboard.models.gpt4.provider'),
+                    category: t('dashboard.models.gpt4.category'),
                     rating: 4.9,
                     uses: 2543000
                   },
                   {
-                    name: "Claude 3.5 Sonnet",
-                    description: "Мощная модель для анализа и создания контента",
-                    provider: "Anthropic",
-                    category: "Текст",
+                    key: 'claude',
+                    name: t('dashboard.models.claude.name'),
+                    description: t('dashboard.models.claude.description'),
+                    provider: t('dashboard.models.claude.provider'),
+                    category: t('dashboard.models.claude.category'),
                     rating: 4.8,
                     uses: 1876000
                   },
                   {
-                    name: "DocAnalyzer AI",
-                    description: "ИИ-модель для анализа документов",
-                    provider: "QazCloud AI-HUB",
-                    category: "Документы",
+                    key: 'docanalyzer',
+                    name: t('dashboard.models.docanalyzer.name'),
+                    description: t('dashboard.models.docanalyzer.description'),
+                    provider: t('dashboard.models.docanalyzer.provider'),
+                    category: t('dashboard.models.docanalyzer.category'),
                     rating: 4.7,
                     uses: 67800
                   }
@@ -197,13 +203,13 @@ export default function Dashboard() {
                         size="sm" 
                         className="w-full"
                         onClick={() => {
-                          if (model.name === "QazLLM-Ultra") {
+                          if (model.key === 'qazllm') {
                             // Make QazLLM functional - navigate to chat
                             window.location.href = '/dashboard';
                           }
                         }}
                       >
-                        {model.name === "QazLLM-Ultra" ? "Использовать" : "Использовать"}
+                        {t('dashboard.use')}
                       </Button>
                     </div>
                   </div>
@@ -221,10 +227,10 @@ export default function Dashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Activity className="h-5 w-5" />
-              Недавние проекты
+              {t('dashboard.recentProjects')}
             </CardTitle>
             <CardDescription>
-              Активные ML-проекты и их статус
+              {t('dashboard.recentProjectsDesc')}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">

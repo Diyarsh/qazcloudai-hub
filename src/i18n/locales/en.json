@@ -66,5 +66,57 @@
     "startConversation": "Start a conversation",
     "startConversationDesc": "Ask questions, get help, or discuss your project",
     "chatPlaceholder": "Start a conversation in this project"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "AI platform activity overview",
+    "createProject": "Create Project",
+    "popularModels": "Popular Models",
+    "popularModelsDesc": "Recommended AI models for your tasks",
+    "viewAll": "View All",
+    "use": "Use",
+    "recentProjects": "Recent Projects",
+    "recentProjectsDesc": "Active ML projects and their status",
+    "models": {
+      "qazllm": {
+        "name": "QazLLM-Ultra",
+        "description": "Sovereign language model for enterprise sector",
+        "provider": "QazCloud AI-HUB",
+        "category": "Text"
+      },
+      "gpt4": {
+        "name": "GPT-4 Turbo",
+        "description": "Advanced language model for text generation",
+        "provider": "OpenAI",
+        "category": "Text"
+      },
+      "claude": {
+        "name": "Claude 3.5 Sonnet",
+        "description": "Powerful model for content analysis and creation",
+        "provider": "Anthropic",
+        "category": "Text"
+      },
+      "docanalyzer": {
+        "name": "DocAnalyzer AI",
+        "description": "AI model for document analysis",
+        "provider": "QazCloud AI-HUB",
+        "category": "Documents"
+      }
+    },
+    "projectTypes": {
+      "classification": "Classification",
+      "mlPipeline": "ML Pipeline",
+      "nlp": "NLP"
+    },
+    "projectStatus": {
+      "inProgress": "In Progress",
+      "completed": "Completed",
+      "planning": "Planning"
+    },
+    "sampleProjects": {
+      "customerAnalysis": "Customer Data Analysis",
+      "recommendationSystem": "Recommendation System",
+      "documentProcessing": "Document Processing"
+    }
   }
 }

@@ -66,5 +66,57 @@
     "startConversation": "Әңгімені бастау",
     "startConversationDesc": "Сұрақтар қойыңыз, көмек алыңыз немесе жобаңызды талқылаңыз",
     "chatPlaceholder": "Осы жобада әңгімені бастаңыз"
+  },
+  "dashboard": {
+    "title": "Басқару тақтасы",
+    "subtitle": "AI-платформасының белсенділігіне шолу",
+    "createProject": "Жоба жасау",
+    "popularModels": "Танымал модельдер",
+    "popularModelsDesc": "Тапсырмаларыңызға ұсынылатын ЖИ модельдері",
+    "viewAll": "Барлығын көру",
+    "use": "Қолдану",
+    "recentProjects": "Соңғы жобалар",
+    "recentProjectsDesc": "Белсенді ML-жобалар және олардың мәртебесі",
+    "models": {
+      "qazllm": {
+        "name": "QazLLM-Ultra",
+        "description": "Корпоративтік сектор үшін егемен тілдік модель",
+        "provider": "QazCloud AI-HUB",
+        "category": "Мәтін"
+      },
+      "gpt4": {
+        "name": "GPT-4 Turbo",
+        "description": "Мәтін генерациялауға арналған озық тілдік модель",
+        "provider": "OpenAI",
+        "category": "Мәтін"
+      },
+      "claude": {
+        "name": "Claude 3.5 Sonnet",
+        "description": "Контентті талдауға және жасауға арналған қуатты модель",
+        "provider": "Anthropic",
+        "category": "Мәтін"
+      },
+      "docanalyzer": {
+        "name": "DocAnalyzer AI",
+        "description": "Құжаттарды талдауға арналған ЖИ моделі",
+        "provider": "QazCloud AI-HUB",
+        "category": "Құжаттар"
+      }
+    },
+    "projectTypes": {
+      "classification": "Классификация",
+      "mlPipeline": "ML Pipeline",
+      "nlp": "NLP"
+    },
+    "projectStatus": {
+      "inProgress": "Орындалуда",
+      "completed": "Аяқталды",
+      "planning": "Жоспарлау"
+    },
+    "sampleProjects": {
+      "customerAnalysis": "Клиенттердің деректерін талдау",
+      "recommendationSystem": "Ұсыныстар жүйесі",
+      "documentProcessing": "Құжаттарды өңдеу"
+    }
   }
 }

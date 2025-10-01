@@ -66,5 +66,57 @@
     "startConversation": "Начать беседу",
     "startConversationDesc": "Задавайте вопросы, получайте помощь или обсуждайте ваш проект",
     "chatPlaceholder": "Начните беседу в этом проекте"
+  },
+  "dashboard": {
+    "title": "Панель управления",
+    "subtitle": "Обзор активности AI-платформы",
+    "createProject": "Создать проект",
+    "popularModels": "Популярные модели",
+    "popularModelsDesc": "Рекомендуемые ИИ-модели для ваших задач",
+    "viewAll": "Смотреть все",
+    "use": "Использовать",
+    "recentProjects": "Недавние проекты",
+    "recentProjectsDesc": "Активные ML-проекты и их статус",
+    "models": {
+      "qazllm": {
+        "name": "QazLLM-Ultra",
+        "description": "Суверенная языковая модель для корпоративного сектора",
+        "provider": "QazCloud AI-HUB",
+        "category": "Текст"
+      },
+      "gpt4": {
+        "name": "GPT-4 Turbo",
+        "description": "Продвинутая языковая модель для генерации текста",
+        "provider": "OpenAI",
+        "category": "Текст"
+      },
+      "claude": {
+        "name": "Claude 3.5 Sonnet",
+        "description": "Мощная модель для анализа и создания контента",
+        "provider": "Anthropic",
+        "category": "Текст"
+      },
+      "docanalyzer": {
+        "name": "DocAnalyzer AI",
+        "description": "ИИ-модель для анализа документов",
+        "provider": "QazCloud AI-HUB",
+        "category": "Документы"
+      }
+    },
+    "projectTypes": {
+      "classification": "Классификация",
+      "mlPipeline": "ML Pipeline",
+      "nlp": "NLP"
+    },
+    "projectStatus": {
+      "inProgress": "В процессе",
+      "completed": "Завершено",
+      "planning": "Планирование"
+    },
+    "sampleProjects": {
+      "customerAnalysis": "Анализ клиентских данных",
+      "recommendationSystem": "Система рекомендаций",
+      "documentProcessing": "Обработка документов"
+    }
   }
 }
