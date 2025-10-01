@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from 'react-i18next';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +27,7 @@ export default function ProjectDetail() {
   const [activeTab, setActiveTab] = useState("files");
   const [message, setMessage] = useState("");
   const { chatSessions, createNewChat, addMessage } = useChatHistory();
+  const { t } = useTranslation();
 
   // Mock project data based on ID
   const project = {
@@ -93,10 +95,10 @@ export default function ProjectDetail() {
       <div className="p-6 border-b border-border">
         <div className="flex items-center gap-2 mb-3">
           <Settings className="h-4 w-4 text-muted-foreground" />
-          <span className="text-sm font-medium text-foreground">Instructions</span>
+          <span className="text-sm font-medium text-foreground">{t('projects.instructions')}</span>
         </div>
         <p className="text-sm text-muted-foreground">
-          Set up instructions for Grok in this project
+          {t('projects.instructionsDesc')}
         </p>
       </div>
 
@@ -106,24 +108,24 @@ export default function ProjectDetail() {
         <div className="w-80 border-r border-border bg-muted/30">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="w-full justify-start bg-transparent p-4 h-auto">
-              <TabsTrigger value="files" className="text-sm">Files</TabsTrigger>
-              <TabsTrigger value="conversations" className="text-sm">Conversations</TabsTrigger>
+              <TabsTrigger value="files" className="text-sm">{t('projects.files')}</TabsTrigger>
+              <TabsTrigger value="conversations" className="text-sm">{t('projects.conversations')}</TabsTrigger>
             </TabsList>
             
             <TabsContent value="files" className="p-4">
               <div className="space-y-4">
                 <Button variant="outline" className="w-full justify-start">
                   <Paperclip className="h-4 w-4 mr-2" />
-                  Attach
+                  {t('projects.attach')}
                 </Button>
                 
                 <div className="text-center py-8">
                   <div className="w-12 h-12 rounded-lg bg-muted mx-auto mb-3 flex items-center justify-center">
                     📁
                   </div>
-                  <h3 className="text-sm font-medium text-foreground mb-1">No files yet</h3>
+                  <h3 className="text-sm font-medium text-foreground mb-1">{t('projects.noFiles')}</h3>
                   <p className="text-xs text-muted-foreground">
-                    Start by attaching files to your project. They will be used in all chats in this project.
+                    {t('projects.noFilesDesc')}
                   </p>
                 </div>
               </div>
@@ -153,7 +155,7 @@ export default function ProjectDetail() {
                     <div className="text-center py-8">
                       <MessageSquare className="h-8 w-8 text-muted-foreground mx-auto mb-2" />
                       <p className="text-xs text-muted-foreground">
-                        No conversations yet
+                        {t('projects.noConversations')}
                       </p>
                     </div>
                   )}
@@ -188,9 +190,9 @@ export default function ProjectDetail() {
               <div className="flex-1 flex items-center justify-center">
                 <div className="text-center">
                   <Bot className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground mb-2">Start a conversation</p>
+                  <p className="text-muted-foreground mb-2">{t('projects.startConversation')}</p>
                   <p className="text-sm text-muted-foreground">
-                    Ask questions, get help, or discuss your project
+                    {t('projects.startConversationDesc')}
                   </p>
                 </div>
               </div>
@@ -202,7 +204,7 @@ export default function ProjectDetail() {
             <div className="flex items-end gap-2">
               <div className="flex-1">
                 <Textarea
-                  placeholder="Start a conversation in this project"
+                  placeholder={t('projects.chatPlaceholder')}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyPress={handleKeyPress}

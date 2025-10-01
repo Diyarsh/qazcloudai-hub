@@ -47,7 +47,24 @@
   },
   "groups": {
     "main": "Main",
-    "development": "Development", 
+    "development": "Development",
     "settings": "Settings"
+  },
+  "projects": {
+    "title": "My Projects",
+    "createNew": "Create New Project",
+    "noProjects": "No projects",
+    "noProjectsDesc": "Create your first project to start working with AI",
+    "instructions": "Instructions",
+    "instructionsDesc": "Set up instructions for Grok in this project",
+    "files": "Files",
+    "conversations": "Conversations",
+    "attach": "Attach",
+    "noFiles": "No files yet",
+    "noFilesDesc": "Start by attaching files to your project. They will be used in all chats in this project.",
+    "noConversations": "No conversations yet",
+    "startConversation": "Start a conversation",
+    "startConversationDesc": "Ask questions, get help, or discuss your project",
+    "chatPlaceholder": "Start a conversation in this project"
   }
 }

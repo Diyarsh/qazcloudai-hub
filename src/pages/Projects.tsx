@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +15,7 @@ import {
 
 export default function Projects() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("my");
 
@@ -68,11 +70,11 @@ export default function Projects() {
       {/* Header */}
       <div className="flex items-center justify-between p-6 border-b border-border">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Projects</h1>
+          <h1 className="text-2xl font-semibold text-foreground">{t('projects.title')}</h1>
         </div>
         <Button onClick={() => navigate("/projects/new")} className="bg-white text-black hover:bg-gray-200">
           <Plus className="h-4 w-4 mr-2" />
-          Create project
+          {t('projects.createNew')}
         </Button>
       </div>
 
@@ -81,7 +83,7 @@ export default function Projects() {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <div className="flex items-center justify-between">
             <TabsList className="bg-muted">
-              <TabsTrigger value="my">My Projects</TabsTrigger>
+              <TabsTrigger value="my">{t('projects.title')}</TabsTrigger>
               <TabsTrigger value="shared">Shared with me</TabsTrigger>
             </TabsList>
             
@@ -127,18 +129,18 @@ export default function Projects() {
               <div className="text-center py-12">
                 <Bot className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-foreground mb-2">
-                  No projects found
+                  {t('projects.noProjects')}
                 </h3>
                 <p className="text-muted-foreground mb-4">
                   {activeTab === "my" 
-                    ? "Create your first project to get started"
+                    ? t('projects.noProjectsDesc')
                     : "No projects match your search criteria"
                   }
                 </p>
                 {activeTab === "my" && (
                   <Button onClick={() => navigate("/projects/new")} className="bg-white text-black hover:bg-gray-200">
                     <Plus className="h-4 w-4 mr-2" />
-                    Create project
+                    {t('projects.createNew')}
                   </Button>
                 )}
               </div>
