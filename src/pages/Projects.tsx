@@ -1,60 +1,49 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CreateProjectDialog } from "@/components/projects/CreateProjectDialog";
 import { 
   Search, 
   Plus,
-  Bot,
-  Zap,
-  MessageCircle
+  Users,
+  FileText,
+  Brain,
+  Sparkles
 } from "lucide-react";
 
 export default function Projects() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("my");
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
 
   const projects = [
     {
       id: "1",
-      name: "QC",
-      icon: "🤖",
+      name: "HR Ассистент",
+      description: "AI помощник для HR задач и управления персоналом",
+      icon: Users,
+      color: "text-blue-500",
       isShared: false
     },
     {
       id: "2", 
-      name: "New Project",
-      icon: "🔥",
+      name: "Анализ документов",
+      description: "Обработка и анализ документов с помощью AI",
+      icon: FileText,
+      color: "text-green-500",
       isShared: false
     },
     {
       id: "3",
-      name: "New Project",
-      icon: "🔗",
+      name: "AI-HUB",
+      description: "Центральная платформа для AI решений",
+      icon: Brain,
+      color: "text-purple-500",
       isShared: false
-    },
-    {
-      id: "4",
-      name: "AI Assistant",
-      icon: "💬",
-      isShared: true
-    },
-    {
-      id: "5",
-      name: "Document Processor",
-      icon: "📄",
-      isShared: false
-    },
-    {
-      id: "6",
-      name: "Data Analytics",
-      icon: "📊",
-      isShared: true
     }
   ];
 
@@ -70,21 +59,29 @@ export default function Projects() {
       {/* Header */}
       <div className="flex items-center justify-between p-6 border-b border-border">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">{t('projects.title')}</h1>
+          <h1 className="text-2xl font-semibold text-foreground">Мои проекты</h1>
         </div>
-        <Button onClick={() => navigate("/projects/new")} className="bg-white text-black hover:bg-gray-200">
+        <Button 
+          onClick={() => setCreateDialogOpen(true)} 
+          className="bg-primary text-primary-foreground hover:bg-primary/90"
+        >
           <Plus className="h-4 w-4 mr-2" />
-          {t('projects.createNew')}
+          Создать проект
         </Button>
       </div>
+
+      <CreateProjectDialog 
+        open={createDialogOpen} 
+        onOpenChange={setCreateDialogOpen} 
+      />
 
       {/* Tabs */}
       <div className="p-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
           <div className="flex items-center justify-between">
             <TabsList className="bg-muted">
-              <TabsTrigger value="my">{t('projects.title')}</TabsTrigger>
-              <TabsTrigger value="shared">Shared with me</TabsTrigger>
+              <TabsTrigger value="my">Мои проекты</TabsTrigger>
+              <TabsTrigger value="shared">Общие проекты</TabsTrigger>
             </TabsList>
             
             <div className="relative">
@@ -100,47 +97,56 @@ export default function Projects() {
 
           <TabsContent value={activeTab} className="space-y-0">
             {/* Projects Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-              {filteredProjects.map((project) => (
-                <Card 
-                  key={project.id} 
-                  className="group cursor-pointer hover:bg-muted/50 transition-colors border-border bg-card"
-                  onClick={() => navigate(`/projects/${project.id}`)}
-                >
-                  <CardContent className="p-6 space-y-4">
-                    {/* Project Icon */}
-                    <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center text-2xl">
-                      {project.icon}
-                    </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {filteredProjects.map((project) => {
+                const IconComponent = project.icon;
+                return (
+                  <Card 
+                    key={project.id} 
+                    className="group cursor-pointer hover:border-primary/50 transition-all duration-200 border-border bg-card"
+                    onClick={() => navigate(`/projects/${project.id}`)}
+                  >
+                    <CardContent className="p-6 space-y-4">
+                      {/* Project Icon */}
+                      <div className={`w-12 h-12 rounded-lg bg-muted/50 flex items-center justify-center ${project.color}`}>
+                        <IconComponent className="h-6 w-6" />
+                      </div>
 
-                    {/* Project Name */}
-                    <div>
-                      <h3 className="font-medium text-foreground group-hover:text-primary transition-colors">
-                        {project.name}
-                      </h3>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                      {/* Project Info */}
+                      <div className="space-y-2">
+                        <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                          {project.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {project.description}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
 
             {/* Empty State */}
             {filteredProjects.length === 0 && (
               <div className="text-center py-12">
-                <Bot className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <Sparkles className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                 <h3 className="text-lg font-medium text-foreground mb-2">
-                  {t('projects.noProjects')}
+                  Проектов не найдено
                 </h3>
                 <p className="text-muted-foreground mb-4">
                   {activeTab === "my" 
-                    ? t('projects.noProjectsDesc')
-                    : "No projects match your search criteria"
+                    ? "Создайте свой первый проект для начала работы с AI"
+                    : "Нет проектов, соответствующих критериям поиска"
                   }
                 </p>
                 {activeTab === "my" && (
-                  <Button onClick={() => navigate("/projects/new")} className="bg-white text-black hover:bg-gray-200">
+                  <Button 
+                    onClick={() => setCreateDialogOpen(true)} 
+                    className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  >
                     <Plus className="h-4 w-4 mr-2" />
-                    {t('projects.createNew')}
+                    Создать проект
                   </Button>
                 )}
               </div>
