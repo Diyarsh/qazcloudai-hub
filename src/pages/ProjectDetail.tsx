@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChatHistory } from "@/hooks/useChatHistory";
+import { AppLayout } from "@/components/layout/AppLayout";
 import { 
   ChevronLeft,
   Settings,
@@ -80,11 +81,12 @@ export default function ProjectDetail() {
   ];
 
   return (
-    <div className="min-h-screen bg-background flex">
-      {/* Left Sidebar - Projects List */}
-      <div className="w-60 border-r border-border flex flex-col">
-        {/* Sidebar Header */}
-        <div className="p-4 border-b border-border">
+    <AppLayout>
+      <div className="flex h-full">
+        {/* Left Sidebar - Projects List */}
+        <div className="w-60 border-r border-border flex flex-col bg-background">
+          {/* Sidebar Header */}
+          <div className="p-4 border-b border-border">
           <Button 
             variant="ghost" 
             size="icon"
@@ -344,9 +346,10 @@ export default function ProjectDetail() {
                 </div>
               </div>
             </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }
