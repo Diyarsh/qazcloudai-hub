@@ -85,7 +85,11 @@
     "images": "Изображения",
     "history": "История",
     "user": "Пользователь",
-    "preferredModel": "Предпочитаемая модель"
+    "preferredModel": "Предпочитаемая модель",
+    "projectSettings": "Настройки проекта",
+    "projectInstructions": "Инструкции проекта",
+    "discard": "Отменить",
+    "save": "Сохранить"
   },
   "dashboard": {
     "title": "Панель управления",

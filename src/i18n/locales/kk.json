@@ -85,7 +85,11 @@
     "images": "Суреттер",
     "history": "Тарих",
     "user": "Пайдаланушы",
-    "preferredModel": "Қалаулы модель"
+    "preferredModel": "Қалаулы модель",
+    "projectSettings": "Жоба параметрлері",
+    "projectInstructions": "Жоба нұсқаулары",
+    "discard": "Болдырмау",
+    "save": "Сақтау"
   },
   "dashboard": {
     "title": "Басқару тақтасы",

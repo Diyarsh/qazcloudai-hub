@@ -85,7 +85,11 @@
     "images": "Images",
     "history": "History",
     "user": "User",
-    "preferredModel": "Preferred model"
+    "preferredModel": "Preferred model",
+    "projectSettings": "Project settings",
+    "projectInstructions": "Project instructions",
+    "discard": "Discard",
+    "save": "Save"
   },
   "dashboard": {
     "title": "Dashboard",

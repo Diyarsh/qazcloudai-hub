@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { ChevronLeft, Settings, MoreHorizontal, Paperclip, Send, MessageSquare, Calendar, Bot, Search, Users, FileText, Brain, Sparkles, Plus } from "lucide-react";
@@ -27,6 +28,7 @@ export default function ProjectDetail() {
   const [message, setMessage] = useState("");
   const [selectedModel, setSelectedModel] = useState("auto");
   const [instructions, setInstructions] = useState("");
+  const [isInstructionsDialogOpen, setIsInstructionsDialogOpen] = useState(false);
   const {
     chatSessions,
     createNewChat,
@@ -110,75 +112,28 @@ export default function ProjectDetail() {
           </div>
         </div>
 
-        {/* Instructions Section */}
-        <div className="p-6 border-b border-border bg-muted/20 space-y-4">
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <Settings className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm font-medium text-foreground">{t('projects.instructions')}</span>
-            </div>
-            <Textarea
-              placeholder={t('projects.instructionsPlaceholder')}
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              className="min-h-[100px] resize-none bg-background"
-            />
-          </div>
-
-          <div>
-            <label className="text-sm font-medium text-foreground mb-2 block">
-              {t('projects.preferredModel')}
-            </label>
-            <Select value={selectedModel} onValueChange={setSelectedModel}>
-              <SelectTrigger className="w-full bg-background">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-background">
-                <SelectItem value="auto">
-                  <div className="flex items-center gap-3">
-                    <Sparkles className="h-4 w-4" />
-                    <div className="flex flex-col items-start">
-                      <span className="font-medium">Auto</span>
-                      <span className="text-xs text-muted-foreground">Chooses Fast or Expert</span>
-                    </div>
-                  </div>
-                </SelectItem>
-                <SelectItem value="qazllm-ultra">
-                  <div className="flex items-center gap-3">
-                    <Brain className="h-4 w-4" />
-                    <div className="flex flex-col items-start">
-                      <span className="font-medium">QazLLM-Ultra</span>
-                      <span className="text-xs text-muted-foreground">Sovereign model for complex tasks</span>
-                    </div>
-                  </div>
-                </SelectItem>
-                <SelectItem value="gpt4-turbo">
-                  <div className="flex items-center gap-3">
-                    <Bot className="h-4 w-4" />
-                    <div className="flex flex-col items-start">
-                      <span className="font-medium">GPT-4 Turbo</span>
-                      <span className="text-xs text-muted-foreground">Fast and accurate responses</span>
-                    </div>
-                  </div>
-                </SelectItem>
-                <SelectItem value="claude-sonnet">
-                  <div className="flex items-center gap-3">
-                    <MessageSquare className="h-4 w-4" />
-                    <div className="flex flex-col items-start">
-                      <span className="font-medium">Claude 3.5 Sonnet</span>
-                      <span className="text-xs text-muted-foreground">Powerful reasoning capabilities</span>
-                    </div>
-                  </div>
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-
         {/* Content with Tabs and Chat */}
         <div className="flex-1 flex">
           {/* Center Panel - Tabs */}
           <div className="w-80 border-r border-border bg-muted/30">
+            {/* Instructions Card */}
+            <div 
+              className="p-4 border-b border-border cursor-pointer hover:bg-muted/50 transition-colors"
+              onClick={() => setIsInstructionsDialogOpen(true)}
+            >
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <Settings className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-medium text-foreground">{t('projects.instructions')}</span>
+                </div>
+              </div>
+              {instructions ? (
+                <p className="text-sm text-muted-foreground line-clamp-2">{instructions}</p>
+              ) : (
+                <p className="text-sm text-muted-foreground">{t('projects.instructionsDesc')}</p>
+              )}
+            </div>
+
             <Tabs value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="w-full justify-start bg-transparent p-4 h-auto border-b border-border">
                 <TabsTrigger value="files" className="text-sm">{t('projects.files')}</TabsTrigger>
@@ -282,5 +237,91 @@ export default function ProjectDetail() {
           </div>
         </div>
       </div>
+
+      {/* Instructions Dialog */}
+      <Dialog open={isInstructionsDialogOpen} onOpenChange={setIsInstructionsDialogOpen}>
+        <DialogContent className="sm:max-w-[600px] bg-background">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold">{t('projects.projectSettings')}</DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-6 py-4">
+            <div>
+              <label className="text-sm font-medium text-foreground mb-2 block">
+                {t('projects.projectInstructions')}
+              </label>
+              <Textarea
+                placeholder={t('projects.instructionsPlaceholder')}
+                value={instructions}
+                onChange={(e) => setInstructions(e.target.value)}
+                className="min-h-[200px] resize-none bg-muted"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-medium text-foreground mb-2 block">
+                {t('projects.preferredModel')}
+              </label>
+              <Select value={selectedModel} onValueChange={setSelectedModel}>
+                <SelectTrigger className="w-full bg-muted">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-background z-[100]">
+                  <SelectItem value="auto">
+                    <div className="flex items-center gap-3">
+                      <Sparkles className="h-4 w-4" />
+                      <div className="flex flex-col items-start">
+                        <span className="font-medium">Auto</span>
+                        <span className="text-xs text-muted-foreground">Chooses Fast or Expert</span>
+                      </div>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="qazllm-ultra">
+                    <div className="flex items-center gap-3">
+                      <Brain className="h-4 w-4" />
+                      <div className="flex flex-col items-start">
+                        <span className="font-medium">QazLLM-Ultra</span>
+                        <span className="text-xs text-muted-foreground">Sovereign model for complex tasks</span>
+                      </div>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="gpt4-turbo">
+                    <div className="flex items-center gap-3">
+                      <Bot className="h-4 w-4" />
+                      <div className="flex flex-col items-start">
+                        <span className="font-medium">GPT-4 Turbo</span>
+                        <span className="text-xs text-muted-foreground">Fast and accurate responses</span>
+                      </div>
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="claude-sonnet">
+                    <div className="flex items-center gap-3">
+                      <MessageSquare className="h-4 w-4" />
+                      <div className="flex flex-col items-start">
+                        <span className="font-medium">Claude 3.5 Sonnet</span>
+                        <span className="text-xs text-muted-foreground">Powerful reasoning capabilities</span>
+                      </div>
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4 border-t border-border">
+            <Button 
+              variant="ghost" 
+              onClick={() => setIsInstructionsDialogOpen(false)}
+            >
+              {t('projects.discard')}
+            </Button>
+            <Button 
+              onClick={() => setIsInstructionsDialogOpen(false)}
+            >
+              {t('projects.save')}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </AppLayout>;
 }
