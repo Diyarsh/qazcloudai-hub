@@ -9,32 +9,26 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChatHistory } from "@/hooks/useChatHistory";
 import { AppLayout } from "@/components/layout/AppLayout";
-import { 
-  ChevronLeft,
-  Settings,
-  MoreHorizontal,
-  Paperclip,
-  Send,
-  MessageSquare,
-  Calendar,
-  Bot,
-  Search,
-  Users,
-  FileText,
-  Brain,
-  Sparkles,
-  Plus
-} from "lucide-react";
+import { ChevronLeft, Settings, MoreHorizontal, Paperclip, Send, MessageSquare, Calendar, Bot, Search, Users, FileText, Brain, Sparkles, Plus } from "lucide-react";
 import { format, formatDistanceToNow } from "date-fns";
 import { ru } from "date-fns/locale";
-
 export default function ProjectDetail() {
-  const { id } = useParams<{ id: string }>();
+  const {
+    id
+  } = useParams<{
+    id: string;
+  }>();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const {
+    t
+  } = useTranslation();
   const [activeTab, setActiveTab] = useState("files");
   const [message, setMessage] = useState("");
-  const { chatSessions, createNewChat, addMessage } = useChatHistory();
+  const {
+    chatSessions,
+    createNewChat,
+    addMessage
+  } = useChatHistory();
 
   // Mock project data based on ID
   const project = {
@@ -44,10 +38,7 @@ export default function ProjectDetail() {
   };
 
   // Get chat sessions for this project (filtering by project ID or creating project-specific sessions)
-  const projectSessions = Object.values(chatSessions).filter(session => 
-    session.title.includes(project.name) || session.id.includes(`project-${id}`)
-  );
-
+  const projectSessions = Object.values(chatSessions).filter(session => session.title.includes(project.name) || session.id.includes(`project-${id}`));
   const handleSendMessage = async () => {
     if (!message.trim()) return;
 
@@ -66,39 +57,44 @@ export default function ProjectDetail() {
       addMessage(sessionId, "Это ответ от AI assistant для проекта " + project.name, false);
     }, 1000);
   };
-
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
   };
-
-  const allProjects = [
-    { id: "1", name: "HR Ассистент", icon: Users, color: "text-blue-500" },
-    { id: "2", name: "Анализ документов", icon: FileText, color: "text-green-500" },
-    { id: "3", name: "AI-HUB", icon: Brain, color: "text-purple-500" },
-  ];
-
-  return (
-    <AppLayout>
+  const allProjects = [{
+    id: "1",
+    name: "HR Ассистент",
+    icon: Users,
+    color: "text-blue-500"
+  }, {
+    id: "2",
+    name: "Анализ документов",
+    icon: FileText,
+    color: "text-green-500"
+  }, {
+    id: "3",
+    name: "AI-HUB",
+    icon: Brain,
+    color: "text-purple-500"
+  }];
+  return <AppLayout>
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-border">
           <div className="flex items-center gap-3">
             {allProjects.find(p => p.id === id) && (() => {
-              const currentProject = allProjects.find(p => p.id === id)!;
-              const IconComponent = currentProject.icon;
-              return (
-                <>
+            const currentProject = allProjects.find(p => p.id === id)!;
+            const IconComponent = currentProject.icon;
+            return <>
                   <div className={`w-8 h-8 rounded-md bg-muted flex items-center justify-center ${currentProject.color}`}>
                     <IconComponent className="h-5 w-5" />
                   </div>
                   <h1 className="text-lg font-semibold text-foreground">{currentProject.name}</h1>
-                </>
-              );
-            })()}
+                </>;
+          })()}
           </div>
           
           <div className="flex items-center gap-2">
@@ -156,31 +152,25 @@ export default function ProjectDetail() {
               <TabsContent value="conversations" className="p-0 mt-0">
                 <ScrollArea className="h-[calc(100vh-280px)]">
                   <div className="p-4 space-y-2">
-                    {projectSessions.length > 0 ? (
-                      projectSessions.map((session) => (
-                        <Card key={session.id} className="cursor-pointer hover:bg-muted/50 transition-colors border-border">
+                    {projectSessions.length > 0 ? projectSessions.map(session => <Card key={session.id} className="cursor-pointer hover:bg-muted/50 transition-colors border-border">
                           <CardContent className="p-3">
                             <h4 className="text-sm font-medium text-foreground mb-1 line-clamp-1">
                               {session.title}
                             </h4>
                             <div className="flex items-center gap-1 text-xs text-muted-foreground">
                               <Calendar className="h-3 w-3" />
-                              {formatDistanceToNow(session.updatedAt, { 
-                                addSuffix: true, 
-                                locale: ru 
-                              })}
+                              {formatDistanceToNow(session.updatedAt, {
+                          addSuffix: true,
+                          locale: ru
+                        })}
                             </div>
                           </CardContent>
-                        </Card>
-                      ))
-                    ) : (
-                      <div className="text-center py-12">
+                        </Card>) : <div className="text-center py-12">
                         <MessageSquare className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
                         <p className="text-xs text-muted-foreground px-6">
                           {t('projects.noConversations')}
                         </p>
-                      </div>
-                    )}
+                      </div>}
                   </div>
                 </ScrollArea>
               </TabsContent>
@@ -191,25 +181,18 @@ export default function ProjectDetail() {
           <div className="flex-1 flex flex-col">
             {/* Chat Messages */}
             <ScrollArea className="flex-1 p-6">
-              {projectSessions.length > 0 && projectSessions[0].messages.length > 0 ? (
-                <div className="space-y-4 max-w-3xl mx-auto">
-                  {projectSessions[0].messages.map((msg, index) => (
-                    <div key={index} className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`max-w-[80%] rounded-lg p-4 ${
-                        msg.isUser 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted text-foreground'
-                      }`}>
+              {projectSessions.length > 0 && projectSessions[0].messages.length > 0 ? <div className="space-y-4 max-w-3xl mx-auto">
+                  {projectSessions[0].messages.map((msg, index) => <div key={index} className={`flex ${msg.isUser ? 'justify-end' : 'justify-start'}`}>
+                      <div className={`max-w-[80%] rounded-lg p-4 ${msg.isUser ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'}`}>
                         <p className="text-sm">{msg.content}</p>
                         <div className="text-xs opacity-70 mt-2">
-                          {format(msg.timestamp, 'HH:mm', { locale: ru })}
+                          {format(msg.timestamp, 'HH:mm', {
+                      locale: ru
+                    })}
                         </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex-1 flex items-center justify-center h-full">
+                    </div>)}
+                </div> : <div className="flex-1 flex items-center justify-center h-full">
                   <div className="text-center">
                     <Bot className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
                     <p className="text-lg font-medium text-foreground mb-2">
@@ -219,8 +202,7 @@ export default function ProjectDetail() {
                       {t('projects.startConversationDesc')}
                     </p>
                   </div>
-                </div>
-              )}
+                </div>}
             </ScrollArea>
 
             {/* Chat Input */}
@@ -230,31 +212,18 @@ export default function ProjectDetail() {
                   <Button variant="ghost" size="icon" className="shrink-0">
                     <Paperclip className="h-4 w-4" />
                   </Button>
-                  <Textarea
-                    placeholder={t('projects.chatPlaceholder')}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    className="min-h-[60px] resize-none border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-                    rows={2}
-                  />
-                  <Button 
-                    size="icon" 
-                    onClick={handleSendMessage}
-                    disabled={!message.trim()}
-                    className="bg-primary hover:bg-primary/90 shrink-0"
-                  >
+                  <Textarea placeholder={t('projects.chatPlaceholder')} value={message} onChange={e => setMessage(e.target.value)} onKeyPress={handleKeyPress} className="min-h-[60px] resize-none border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0" rows={2} />
+                  <Button size="icon" onClick={handleSendMessage} disabled={!message.trim()} className="bg-primary hover:bg-primary/90 shrink-0">
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
                 <div className="flex items-center justify-between mt-2 text-xs text-muted-foreground">
-                  <span>Grok 4 Fast</span>
+                  
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </AppLayout>
-  );
+    </AppLayout>;
 }
