@@ -82,100 +82,6 @@ export default function ProjectDetail() {
 
   return (
     <AppLayout>
-      <div className="flex h-full">
-        {/* Left Sidebar - Projects List */}
-        <div className="w-60 border-r border-border flex flex-col bg-background">
-          {/* Sidebar Header */}
-          <div className="p-4 border-b border-border">
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={() => navigate("/projects")}
-            className="mb-4"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          
-          <div className="relative mb-4">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder={t('projects.search') + " ⌘K"}
-              className="pl-10 bg-muted border-0 h-9"
-            />
-          </div>
-
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start text-muted-foreground hover:text-foreground mb-2"
-          >
-            <MessageSquare className="h-4 w-4 mr-2" />
-            {t('projects.chat')}
-          </Button>
-          
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start text-muted-foreground hover:text-foreground"
-          >
-            <Sparkles className="h-4 w-4 mr-2" />
-            {t('projects.images')}
-          </Button>
-        </div>
-
-        {/* Projects Section */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="p-3">
-            <div className="text-xs font-medium text-muted-foreground mb-2 px-2">
-              {t('navigation.myProjects')}
-            </div>
-            <div className="space-y-1">
-              {allProjects.map((proj) => {
-                const IconComponent = proj.icon;
-                return (
-                  <Button
-                    key={proj.id}
-                    variant={proj.id === id ? "secondary" : "ghost"}
-                    className="w-full justify-start"
-                    onClick={() => navigate(`/projects/${proj.id}`)}
-                  >
-                    <IconComponent className={`h-4 w-4 mr-2 ${proj.color}`} />
-                    <span className="truncate">{proj.name}</span>
-                  </Button>
-                );
-              })}
-              
-              <Button
-                variant="ghost"
-                className="w-full justify-start text-primary"
-                onClick={() => navigate("/projects")}
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                {t('projects.new')}
-              </Button>
-            </div>
-          </div>
-
-          <div className="p-3 pt-4">
-            <Button
-              variant="ghost"
-              className="w-full justify-start text-muted-foreground hover:text-foreground"
-            >
-              <Calendar className="h-4 w-4 mr-2" />
-              {t('projects.history')}
-            </Button>
-          </div>
-        </div>
-
-        {/* User Section */}
-        <div className="p-4 border-t border-border">
-          <Button variant="ghost" className="w-full justify-start" size="sm">
-            <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mr-2 text-xs">
-              U
-            </div>
-            <span className="truncate">{t('projects.user')}</span>
-          </Button>
-        </div>
-      </div>
-
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
@@ -345,7 +251,6 @@ export default function ProjectDetail() {
                   <span>Grok 4 Fast</span>
                 </div>
               </div>
-            </div>
             </div>
           </div>
         </div>
