@@ -84,7 +84,8 @@
     "chat": "Chat",
     "images": "Images",
     "history": "History",
-    "user": "User"
+    "user": "User",
+    "preferredModel": "Preferred model"
   },
   "dashboard": {
     "title": "Dashboard",
