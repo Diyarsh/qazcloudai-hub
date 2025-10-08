@@ -3,7 +3,6 @@ import Agents from "./lab/Agents";
 import Data from "./lab/Data";
 import Catalog from "./lab/Catalog";
 import Monitoring from "./lab/Monitoring";
-import Documentation from "./Documentation";
 
 export default function Laboratory() {
   return (
@@ -16,12 +15,11 @@ export default function Laboratory() {
       </div>
 
       <Tabs defaultValue="agents" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="agents">Агенты</TabsTrigger>
           <TabsTrigger value="data">ML-Студия</TabsTrigger>
           <TabsTrigger value="catalog">Каталог</TabsTrigger>
           <TabsTrigger value="monitoring">Мониторинг</TabsTrigger>
-          <TabsTrigger value="docs">Документация</TabsTrigger>
         </TabsList>
 
         <TabsContent value="agents">
@@ -38,10 +36,6 @@ export default function Laboratory() {
 
         <TabsContent value="monitoring">
           <Monitoring />
-        </TabsContent>
-
-        <TabsContent value="docs">
-          <Documentation />
         </TabsContent>
       </Tabs>
     </div>
