@@ -18,7 +18,7 @@ export default function Laboratory() {
       <Tabs defaultValue="agents" className="space-y-6">
         <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="agents">Агенты</TabsTrigger>
-          <TabsTrigger value="data">Данные</TabsTrigger>
+          <TabsTrigger value="data">ML-Студия</TabsTrigger>
           <TabsTrigger value="catalog">Каталог</TabsTrigger>
           <TabsTrigger value="monitoring">Мониторинг</TabsTrigger>
           <TabsTrigger value="docs">Документация</TabsTrigger>
