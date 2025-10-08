@@ -239,52 +239,22 @@ export default function Data() {
                 <Button className="w-full">Создать модель</Button>
               </CardContent>
             </Card>
-          </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Мастер AutoML</CardTitle>
-              <CardDescription>
-                Пошаговое создание модели машинного обучения
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label>Датасет</Label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите датасет" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {datasets.map((dataset) => (
-                        <SelectItem key={dataset.id} value={dataset.id}>
-                          {dataset.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label>Целевая переменная</Label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите колонку" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="price">Цена</SelectItem>
-                      <SelectItem value="category">Категория</SelectItem>
-                      <SelectItem value="status">Статус</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <Button className="w-full">
-                <Play className="h-4 w-4 mr-2" />
-                Запустить AutoML
-              </Button>
-            </CardContent>
-          </Card>
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="h-5 w-5 text-primary" />
+                  Кластеризация
+                </CardTitle>
+                <CardDescription>
+                  Группировка данных по схожести
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full">Создать модель</Button>
+              </CardContent>
+            </Card>
+          </div>
         </TabsContent>
 
         {/* Transform Tab */}
@@ -307,6 +277,64 @@ export default function Data() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Monitoring Section */}
+      <div className="mt-8 space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold text-foreground">Мониторинг моделей</h2>
+          <p className="text-muted-foreground">Отслеживание производительности ML моделей</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Активные модели</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <BarChart3 className="h-6 w-6 text-blue-500" />
+                <span className="text-2xl font-bold">2</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Средний AUC</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <BarChart3 className="h-6 w-6 text-green-500" />
+                <span className="text-2xl font-bold">0.95</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Всего предсказаний</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <BarChart3 className="h-6 w-6 text-purple-500" />
+                <span className="text-2xl font-bold">23K</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Дрейф признаков</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <BarChart3 className="h-6 w-6 text-yellow-500" />
+                <span className="text-2xl font-bold">1</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

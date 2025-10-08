@@ -199,6 +199,64 @@ export default function Agents() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Monitoring Section */}
+      <div className="mt-8 space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold text-foreground">Мониторинг агентов</h2>
+          <p className="text-muted-foreground">Отслеживание производительности AI агентов</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Активные агенты</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <Activity className="h-6 w-6 text-green-500" />
+                <span className="text-2xl font-bold">2</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Среднее время ответа</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <Activity className="h-6 w-6 text-blue-500" />
+                <span className="text-2xl font-bold">1000ms</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Общая ошибок %</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <Activity className="h-6 w-6 text-red-500" />
+                <span className="text-2xl font-bold">1.8%</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">Всего токенов</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center gap-2">
+                <Activity className="h-6 w-6 text-purple-500" />
+                <span className="text-2xl font-bold">77K</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }
