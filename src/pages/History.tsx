@@ -1,7 +1,15 @@
 import { useState, useMemo, useEffect } from "react";
 import { Input } from "@/components/ui/input";
-import { Search, ExternalLink, Edit2, Trash2, MoreHorizontal } from "lucide-react";
+import { Search, ExternalLink, Edit2, Trash2, MoreHorizontal, MessageSquare, FileText } from "lucide-react";
 import { useChatHistory } from "@/hooks/useChatHistory";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { useNavigate } from "react-router-dom";
 import {
   DropdownMenu,
@@ -169,89 +177,104 @@ export default function History() {
     setDeleteDialogOpen(false);
     setSessionToDelete(null);
   };
-  return <div className="max-w-4xl mx-auto p-6">
+  return <div className="max-w-7xl mx-auto p-6">
       {/* Header */}
-      <h1 className="text-2xl font-semibold text-center mb-8">История</h1>
-      
-      {/* Search */}
-      <div className="relative mb-8">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-        <Input placeholder="Search" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-10 bg-transparent border-muted/30" />
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-semibold">История</h1>
+        
+        {/* Search */}
+        <div className="relative w-80">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input placeholder="Search" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="pl-10 bg-background" />
+        </div>
       </div>
 
-      {/* Chat Sessions List */}
-      <div className="space-y-0">
-        {filteredSessions.length === 0 ? (
-          <div className="text-center py-12 text-muted-foreground">
-            {searchQuery ? "No conversations found" : "No conversations yet"}
-          </div>
-        ) : (
-          filteredSessions.map(session => (
-            <div 
-              key={session.id} 
-              className="group flex items-center justify-between py-4 px-4 hover:bg-muted/20 cursor-pointer transition-colors rounded-lg"
-            >
-              <div 
-                className="flex-1 min-w-0"
-                onClick={() => handleSessionClick(session.id)}
-              >
-                <p className="text-foreground truncate">{session.title}</p>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <div className="text-sm text-muted-foreground ml-4 whitespace-nowrap">
-                  {getRelativeTime(session.updatedAt)}
-                </div>
-                
-                {/* Action buttons - shown on hover */}
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="h-8 w-8 p-0"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleOpenInNewTab(session.id);
-                        }}
-                      >
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        Открыть в новой вкладке
-                      </DropdownMenuItem>
-                      <DropdownMenuItem 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleRename(session.id, session.title);
-                        }}
-                      >
-                        <Edit2 className="h-4 w-4 mr-2" />
-                        Переименовать
-                      </DropdownMenuItem>
-                      <DropdownMenuItem 
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(session.id);
-                        }}
-                        className="text-destructive"
-                      >
-                        <Trash2 className="h-4 w-4 mr-2" />
-                        Удалить
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
+      {/* Table */}
+      <div className="border rounded-lg">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-12"></TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Type</TableHead>
+              <TableHead>Updated</TableHead>
+              <TableHead className="w-12"></TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredSessions.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={5} className="text-center py-12 text-muted-foreground">
+                  {searchQuery ? "No conversations found" : "No conversations yet"}
+                </TableCell>
+              </TableRow>
+            ) : (
+              filteredSessions.map(session => (
+                <TableRow 
+                  key={session.id}
+                  className="cursor-pointer"
+                  onClick={() => handleSessionClick(session.id)}
+                >
+                  <TableCell>
+                    <MessageSquare className="h-5 w-5 text-muted-foreground" />
+                  </TableCell>
+                  <TableCell className="font-medium">
+                    {session.title}
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    Chat prompt
+                  </TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {getRelativeTime(session.updatedAt)}
+                  </TableCell>
+                  <TableCell>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild onClick={(e) => e.stopPropagation()}>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="h-8 w-8 p-0"
+                        >
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleOpenInNewTab(session.id);
+                          }}
+                        >
+                          <ExternalLink className="h-4 w-4 mr-2" />
+                          Открыть в новой вкладке
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRename(session.id, session.title);
+                          }}
+                        >
+                          <Edit2 className="h-4 w-4 mr-2" />
+                          Переименовать
+                        </DropdownMenuItem>
+                        <DropdownMenuItem 
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(session.id);
+                          }}
+                          className="text-destructive"
+                        >
+                          <Trash2 className="h-4 w-4 mr-2" />
+                          Удалить
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
       </div>
 
       {/* Delete Confirmation Dialog */}
